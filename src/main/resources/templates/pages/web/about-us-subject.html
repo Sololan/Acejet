@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>关于我们</title>
+    <link rel="stylesheet" href="/web/js/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/web/css/common/global.css">
+    <link rel="stylesheet" href="/web/css/common/common.css">
+    <link rel="stylesheet" href="/web/css/about-us-subject.css">
+</head>
+<body>
+<div class="page-container">
+    <div th:replace="pages/web/component::header"></div>
+
+    <div class="page-content">
+        <div class="page-scroll">
+            <div class="page-body">
+                <img class="subject-picture"
+                     th:if="${msgAndKid.subjectMsg.subjectPictureList.size() > 0}"
+                     th:src="@{${session.nginxUrl}+${msgAndKid.subjectMsg.subjectPictureList[0].picture}}" alt="">
+
+                <img class="profile-img"
+                     th:if="${someSubject.profile.subjectPictureList.size() > 0}"
+                     th:src="@{${session.nginxUrl}+${someSubject.profile.subjectPictureList[0].picture}}" alt="">
+                <img class="qualification-img"
+                     th:if="${someSubject.qualification.subjectPictureList.size() > 0}"
+                     th:src="@{${session.nginxUrl}+${someSubject.qualification.subjectPictureList[0].picture}}" alt="">
+
+                <div class="contact-us subject-container">
+                    <div class="left-col">
+                        <div class="title">
+                            <span class="subject-title"
+                                  th:text="${someSubject.contact.subjectName}">
+                                <!--                            联系我们-->
+                            </span>
+                            <span class="subject-sub-title"
+                                  th:text="${someSubject.contact.subjectSubName}">
+                            <!--                                Contact us-->
+                            </span>
+                        </div>
+                        <div class="column-divider"></div>
+
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <img class="icon-phone" src="/web/image/acejet/icon-phone.png" alt="">
+                                </div>
+                                <span class="contact-label">电话：</span>
+                                <span class="contact-text"
+                                      th:if="${someSubject.contact.subjectLinkList.size() > 0}"
+                                      th:text="${someSubject.contact.subjectLinkList[0].linkName}">
+                                </span>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <img class="icon-mail" src="/web/image/acejet/icon-mail.png" alt="">
+                                </div>
+                                <span class="contact-label">邮箱：</span>
+                                <span class="contact-text"
+                                      th:if="${someSubject.contact.subjectLinkList.size() > 1}"
+                                      th:text="${someSubject.contact.subjectLinkList[1].linkName}">
+                                </span>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <img class="icon-address" src="/web/image/acejet/icon-address.png" alt="">
+                                </div>
+                                <span class="contact-label">地址：</span>
+                                <span class="contact-text"
+                                      th:if="${someSubject.contact.subjectLinkList.size() > 2}"
+                                      th:text="${someSubject.contact.subjectLinkList[2].linkName}">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <img class="subject-img"
+                         th:if="${someSubject.contact.subjectPictureList.size() > 0}"
+                         th:src="@{${session.nginxUrl}+${someSubject.contact.subjectPictureList[0].picture}}" alt="">
+                </div>
+            </div>
+
+            <div th:replace="pages/web/component::footer"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/web/js/jquery/jquery-3.4.1.min.js"></script>
+<script src="/web/js/layui/layui.all.js"></script>
+<script src="/web/js/common/global.js"></script>
+<script src="/web/js/page/home.js"></script>
+</body>
+</html>

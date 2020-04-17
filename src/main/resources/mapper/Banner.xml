@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wejoy.wejoycms.mapper.BannerMapper">
+
+    <resultMap id="map" type="com.wejoy.wejoycms.entity.TBanner">
+        <id property="id" column="id"></id>
+    </resultMap>
+
+    <select id="getAllOpenBannerS" resultMap="map">
+        select *
+        from t_banner
+        where status = 1
+    </select>
+
+    <select id="getAllBannerS" resultMap="map">
+        select *
+        from t_banner
+    </select>
+
+    <update id="update">
+        update t_banner
+        <trim prefix="set" suffixOverrides=",">
+            <if test="status != null">
+                STATUS = #{status},
+            </if>
+            <if test="bannerTitle != null">
+                BANNER_TITLE = #{bannerTitle},
+            </if>
+            <if test="picture != null">
+                PICTURE = #{picture},
+            </if>
+            <if test="articleId != null">
+                ARTICLE_ID = #{articleId},
+            </if>
+            <if test="sortNum != null">
+                SORT_NUM = #{sortNum},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <select id="getBannerById" resultMap="map">
+        select *
+        from t_banner
+        where id = #{id}
+    </select>
+    <update id="taggleBanner">
+        update t_banner set STATUS = #{status}
+        where id = #{id}
+    </update>
+</mapper>

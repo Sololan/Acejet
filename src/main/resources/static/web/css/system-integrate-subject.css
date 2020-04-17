@@ -1,0 +1,62 @@
+.integrate-subject {
+    padding: 0.6rem 0 0.2rem;
+}
+
+.integrate-subject .left-col {
+    cursor:pointer;
+    width: 2.4rem;
+}
+
+.integrate-subject .right-col {
+    width: 9.6rem;
+}
+
+.integrate-subject .nav-tab {
+    box-sizing: border-box;
+    width: 1.8rem;
+    height: 0.68rem;
+    padding-left: 0.3rem;
+    background: rgba(204, 204, 204, 1);
+
+    font-size: 0.18rem;
+    /*font-family: Microsoft YaHei;*/
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+    line-height: 0.28rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.integrate-subject .active-tab {
+    background: rgba(54, 124, 248, 1);
+}
+
+.integrate-subject .parallelogram {
+    width: 0.2rem;
+    height: 0.68rem;
+    position: relative;
+}
+
+.parallelogram::before {
+    width: 0.2rem;
+    height: 100%;
+
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0.1rem;
+    z-index: 1;
+    background: rgba(51, 51, 51, 1);
+    /* tan  73.61° = 68 / 20 */
+    transform: skew(-16.39deg);
+}
+
+.integrate-img {
+    width: 9.6rem;
+    height: auto;
+    margin-bottom: 0.4rem;
+}

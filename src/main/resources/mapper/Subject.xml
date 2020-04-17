@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wejoy.wejoycms.mapper.SubjectMapper">
+
+    <resultMap id="map" type="com.wejoy.wejoycms.entity.TSubject">
+        <id property="id" column="id"></id>
+    </resultMap>
+
+    <resultMap id="map2" type="com.wejoy.wejoycms.entity.TSubject">
+        <id property="id" column="id"></id>
+        <collection property="subjectPictureList"
+                    select="com.wejoy.wejoycms.mapper.SubjectPictureMapper.getPictureSBySubjectId"
+                    column="id"></collection>
+        <collection property="subjectLinkList" select="com.wejoy.wejoycms.mapper.SubjectLinkMapper.getLinkSBySubjectId"
+                    column="id"></collection>
+        <collection property="subjectArticleList"
+                    select="com.wejoy.wejoycms.mapper.ArticleMapper.getArticleSBySubjectId" column="id"></collection>
+    </resultMap>
+    <resultMap id="map3" type="com.wejoy.wejoycms.entity.TSubject">
+        <id property="id" column="id"></id>
+        <collection property="subjectArticleList"
+                    select="com.wejoy.wejoycms.mapper.ArticleMapper.getArticleSBySubjectId" column="id"></collection>
+    </resultMap>
+
+    <select id="getArticleAndFile" resultMap="map3">
+        select *
+        from t_subject
+        where STATUS = 1 and DELETE_FLAG = 0
+        and SUBJECT_CODE = #{code}
+        order by SORT_NUM,CREATE_TIME
+    </select>
+
+    <select id="getSonSubjectSByCode" resultMap="map2">
+        select *
+        from t_subject
+        where STATUS = 1 and DELETE_FLAG = 0 and PID =
+        (select id
+        from t_subject
+        where STATUS = 1 and DELETE_FLAG = 0 and SUBJECT_CODE = #{code})
+        order by SORT_NUM
+    </select>
+
+    <select id="getSubjectMsgByCode" resultMap="map2">
+        select *
+        from t_subject
+        where STATUS = 1 and DELETE_FLAG = 0 and SUBJECT_CODE = #{code}
+    </select>
+
+    <select id="getSonSubjectSById" resultMap="map">
+        select *
+        from t_subject
+        where STATUS = 1 and DELETE_FLAG = 0 and PID = #{id}
+    </select>
+
+    <select id="getSubjectMsgById" resultMap="map">
+        select *
+        from t_subject
+        where STATUS = 1 and DELETE_FLAG = 0 and id = #{id}
+    </select>
+
+    <select id="getAllSubjectS" resultMap="map">
+        select *
+        from t_subject
+        where DELETE_FLAG = 0
+    </select>
+
+    <select id="isCodeExists" resultType="String">
+        select SUBJECT_CODE
+        from t_subject
+        where SUBJECT_CODE = #{code}
+    </select>
+
+    <insert id="insertSubject" keyProperty="id" useGeneratedKeys="true">
+        insert into t_subject
+        (
+        SUBJECT_NAME, SUBJECT_SUB_NAME, SUBJECT_CODE, STATUS, TEMPLATE_ID, PID, SHOW_TYPE, IS_EDIT, IS_DELETE,
+        IS_APPEND_CHILD, SORT_NUM, CREATE_TIME, CREATE_USER_NAME, CREATE_USER
+        <if test="subjectBrief != null">
+            ,SUBJECT_BRIEF
+        </if>
+        ) values
+        (
+        #{subjectName}, #{subjectSubName}, #{subjectCode}, #{status}, #{templateId}, #{pId}, #{showType}, #{isEdit},
+        #{isDelete}, #{isAppendChild}, #{sortNum}, #{createTime}, #{createUserName}, #{createUser}
+        <if test="subjectBrief != null">
+            ,#{subjectBrief}
+        </if>
+        )
+    </insert>
+
+    <update id="updateSubject">
+        update t_subject
+        <trim prefix="set" suffixOverrides=",">
+            <if test="subjectName != null">
+                SUBJECT_NAME = #{subjectName},
+            </if>
+            <if test="subjectSubName != null">
+                SUBJECT_SUB_NAME =#{subjectSubName},
+            </if>
+            <if test="subjectCode != null">
+                SUBJECT_CODE = #{subjectCode},
+            </if>
+            <if test="status != null">
+                STATUS = #{status},
+            </if>
+            <if test="templateId != null">
+                TEMPLATE_ID = #{templateId},
+            </if>
+            <if test="pId != null">
+                PID = #{pId},
+            </if>
+            <if test="subjectBrief != null">
+                SUBJECT_BRIEF = #{subjectBrief},
+            </if>
+            <if test="showType != null">
+                SHOW_TYPE = #{showType},
+            </if>
+            <if test="isEdit != null">
+                IS_EDIT = #{isEdit},
+            </if>
+            <if test="isDelete != null">
+                IS_DELETE = #{isDelete},
+            </if>
+            <if test="isAppendChild != null">
+                IS_APPEND_CHILD = #{isAppendChild},
+            </if>
+            <if test="sortNum != null">
+                SORT_NUM = #{sortNum},
+            </if>
+            <if test="deleteFlag != null">
+                DELETE_FLAG = #{deleteFlag},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <select id="getSubjectById" resultMap="map2">
+        select *
+        from t_subject
+        where ID = #{id}
+    </select>
+
+    <select id="getIdByCode" resultType="Long">
+        select ID
+        from t_subject
+        where SUBJECT_CODE = #{code}
+    </select>
+
+    <select id="getAllParentSubjectS" resultMap="map">
+        select *
+        from t_subject
+        where PID = -1
+        and DELETE_FLAG = 0
+    </select>
+
+    <select id="getSomeSubject" resultMap="map2">
+        select *
+        from t_subject
+        where DELETE_FLAG = 0
+        and
+        <foreach collection="list" index="index" item="item" open="(" separator="or" close=")">
+            id = #{item}
+        </foreach>
+    </select>
+
+</mapper>

@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>江苏赛杰科技发展有限公司</title>
+    <link rel="stylesheet" href="/web/js/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/web/css/common/global.css">
+    <link rel="stylesheet" href="/web/css/common/common.css">
+    <link rel ="apple-touch-icon-precomposed" size ="152x152" href ="/acejet64.ico">
+</head>
+<body style="visibility: hidden">
+
+<div class="page-container">
+
+    <div th:replace="pages/web/component::header"></div>
+
+    <div class="page-content">
+        <div class="page-scroll">
+            <div class="page-body">
+                <div th:replace="pages/web/component::banner"></div>
+
+                <!-- 首页-NEWS -->
+                <div class="news-subject" data-type="component7" id="root">
+                    <div class="component7-container">
+                        <div class="subject-container">
+                            <div class="component-content">
+                                <div class="column-row">
+                                    <div class="column-left">
+                                        <div class="column-title"
+                                             th:text="${someSubject.news.subjectSubName}"></div>
+                                        <div class="column-sub-title"
+                                             th:text="${someSubject.news.subjectName}"></div>
+                                        <div class="column-divider"></div>
+                                    </div>
+
+                                    <div class="column-right">
+                                        <div class="column-switch1">
+                                            <a href="javascript:;" class="switch-prev" id="prev-n" v-on:click="switchPage(-1)">
+                                                <img draggable="false" class="switch-image white"
+                                                     src="/web/image/arrow-white.png">
+                                                <img draggable="false" class="switch-image black"
+                                                     src="/web/image/arrow-black.png">
+                                            </a>
+                                            <a href="javascript:;" class="switch-next" id="next-n" v-on:click="switchPage(1)">
+                                                <img draggable="false" class="switch-image white"
+                                                     src="/web/image/arrow-white.png">
+                                                <img draggable="false" class="switch-image black"
+                                                     src="/web/image/arrow-black.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="news-list">
+                                    <div class="news-item" v-for="(item, index) in newsArticle">
+                                        <img class="news-img"
+                                             :src="nginxUrl + item.picture">
+                                        <span class="news-item-trapezoid"></span>
+                                        <span class="news-link-trapezoid"></span>
+                                        <div class="link-column">
+                                            <div class="news-date">{{ item.day }}</div>
+                                            <div class="news-week">{{ item.week }}</div>
+                                            <div class="news-content">{{ item.articleTitle }}</div>
+                                            <a class="column-more1" :href="'/article/'+item.id">
+                                                <span class="column-more-text">查看详情</span>
+                                                <span class="more-icon"></span>
+                                                <img class="column-more-icon" draggable="false"
+                                                     src="/web/image/acejet/icon-arrow.png">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 首页-Solution -->
+                <div class="solution-subject">
+                    <div class="subject-container">
+                        <div class="component-content">
+                            <div class="solution-title">
+                                <div class="column-title"
+                                     th:text="${someSubject.solution.subjectSubName}"></div>
+                                <div class="column-sub-title"
+                                     th:text="${someSubject.solution.subjectName}"></div>
+                                <div class="column-divider"></div>
+                                <div class="solution-text"
+                                     th:text="${someSubject.solution.subjectBrief}"></div>
+                            </div>
+
+                            <div class="solution-list">
+                                <div class="solution-item">
+                                    <img class="solution-img"
+                                         alt=""
+                                         src="/web/image/acejet/classroom.jpg">
+                                    <span class="solution-item-trapezoid"></span>
+                                    <span class="solution-link-trapezoid"></span>
+                                    <div class="link-column">
+                                        <div class="link-title">智慧教室</div>
+                                        <div class="link-description">连通多种终端，覆盖线上、线下教学空 间，贯穿课前、课中、课后全教学场</div>
+                                        <div>
+                                            <a class="link-url"
+                                               href="/subject/classroom">
+                                                查看详情
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="solution-item">
+                                    <img class="solution-img"
+                                         alt=""
+                                         src="/web/image/acejet/healthcare.jpg">
+                                    <span class="solution-item-trapezoid"></span>
+                                    <span class="solution-link-trapezoid"></span>
+                                    <div class="link-column">
+                                        <div class="link-title">医疗实训</div>
+                                        <div class="link-description">通过医疗实训系统的建设，提高医疗模 拟系统的利用率，提升模拟教学质量</div>
+                                        <div>
+                                            <a class="link-url"
+                                               href="/subject/integrate">
+                                                查看详情
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="solution-item">
+                                    <img class="solution-img"
+                                         alt=""
+                                         src="/web/image/acejet/law.jpg">
+                                    <span class="solution-item-trapezoid"></span>
+                                    <span class="solution-link-trapezoid"></span>
+                                    <div class="link-column">
+                                        <div class="link-title">公检法</div>
+                                        <div class="link-description">专业从事政法领域核心技术和设备的研 发与生产，致力于为数字法院的信息</div>
+                                        <div>
+                                            <a class="link-url"
+                                               href="/subject/integrate">
+                                                查看详情
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="solution-item">
+                                    <img class="solution-img"
+                                         alt=""
+                                         src="/web/image/acejet/hotel.jpg">
+                                    <span class="solution-item-trapezoid"></span>
+                                    <span class="solution-link-trapezoid"></span>
+                                    <div class="link-column">
+                                        <div class="link-title">酒店</div>
+                                        <div class="link-description">以五星级酒店的会议中心为核心的音视 频集成。</div>
+                                        <div>
+                                            <a class="link-url"
+                                               href="/subject/integrate">
+                                                查看详情
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="solution-item">
+                                    <img class="solution-img"
+                                         alt=""
+                                         src="/web/image/acejet/simulation.jpg">
+                                    <span class="solution-item-trapezoid"></span>
+                                    <span class="solution-link-trapezoid"></span>
+                                    <div class="link-column">
+                                        <div class="link-title">虚拟仿真</div>
+                                        <div class="link-description">专业从事政法领域核心技术和设备的研 发与生产，致力于为数字法院和检察</div>
+                                        <div>
+                                            <a class="link-url"
+                                               href="/subject/integrate">
+                                                查看详情
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="solution-item">
+                                    <img class="solution-img"
+                                         alt=""
+                                         src="/web/image/acejet/exhibition.jpg">
+                                    <span class="solution-item-trapezoid"></span>
+                                    <span class="solution-link-trapezoid"></span>
+                                    <div class="link-column">
+                                        <div class="link-title">展览展示</div>
+                                        <div class="link-description">致力于为客户提供合理有效的多媒体互 动体验一站式整体运营。</div>
+                                        <div>
+                                            <a class="link-url"
+                                               href="/subject/integrate">
+                                                查看详情
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 首页-About us -->
+                <div class="about-us-subject" data-type="component4">
+                    <div class="component4-container">
+                        <div class="subject-container">
+                            <div class="component-content">
+                                <div class="column-left">
+                                    <div class="column-title" th:text="${someSubject.aboutUsSub.subjectSubName}"></div>
+                                    <div class="column-sub-title" th:text="${someSubject.aboutUsSub.subjectName}"></div>
+                                    <div class="column-divider"></div>
+                                    <div class="column-describe"
+                                         th:utext="${someSubject.aboutUsSub.subjectBrief}"></div>
+                                    <a class="column-more1"
+                                       th:each="info,infoStat : ${someSubject.aboutUsSub.subjectLinkList}"
+                                       th:if="${infoStat.index} lt 1" th:href="@{${info.linkUrl}}">
+                                        <span class="column-more-text"
+                                              th:if="${infoStat.index} lt 1" th:text="@{${info.linkName}}"></span>
+                                        <span class="more-icon"></span>
+                                        <img class="column-more-icon" draggable="false"
+                                             src="/web/image/acejet/icon-arrow.png">
+                                    </a>
+                                </div>
+                                <div class="column-right">
+                                    <img class="column-right-image" draggable="false"
+                                         th:if="${someSubject.aboutUsSub.subjectPictureList.size() > 0}"
+                                         th:src="@{${session.nginxUrl}+${someSubject.aboutUsSub.subjectPictureList[0].picture}}"
+                                         alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:replace="pages/web/component::footer"></div>
+        </div>
+    </div>
+</div>
+<script src="/web/js/jquery/jquery-3.4.1.min.js"></script>
+<script src="/web/js/layui/layui.all.js"></script>
+<script src="/web/js/common/global.js"></script>
+<script src="/web/js/page/home.js"></script>
+<script src="/web/js/vue/polyfill.min.js"></script>
+<script src="/web/js/vue/vue.min.js"></script>
+<script src="/web/js/axios/axios.min.js"></script>
+<script th:inline="javascript">
+    var vm = new Vue({
+        name: "root",
+        el: "#root",
+        data: function () {
+            return {
+                page: 1,
+                nginxUrl: '',
+                newsArticle: ''
+            }
+        },
+
+        methods: {
+            getNews: function (event) {
+                axios.get('/unique/getArticleForSubject?id=1007&coefficient=2&page=' + this.page)
+                    .then(function (response) {
+                        if(response.data.data[0] == null){
+                            vm.page = vm.page - 1;
+                            return;
+                        }
+                        vm.newsArticle = response.data.data
+
+                        response.data.data.forEach(function (item, index) {
+                            vm.newsArticle[index].week = "星期" + vm.getWeekDay(item.createTime)
+                            vm.newsArticle[index].day = vm.getDay(item.createTime)
+                        });
+                    })
+                    .catch(function (error) {
+                        // console.log(error);
+                    });
+            },
+            getNginxUrl: function (event) {
+                axios.get('/unique/getNginxUrl')
+                    .then(function (response) {
+                        vm.nginxUrl = response.data.data
+                    })
+                    .catch(function (error) {
+                        // console.log(error);
+                    });
+            },
+            switchPage: function (page) {
+                if (vm.page === 1 && page === -1) return;
+                vm.page = vm.page + page;
+                this.getNews();
+            },
+            getWeekDay: function(date)
+            {
+                var weekArray = ["日", "一", "二", "三", "四", "五", "六"];
+                var week = weekArray[this.strToDate(date).getDay()];//注意此处必须是先new一个Date
+                return week;
+            },
+            getDay: function(date)
+            {
+                var year = this.strToDate(date).getFullYear();//注意此处必须是先new一个Date
+                var mouth = this.strToDate(date).getMonth() + 1;
+                var day = this.strToDate(date).getDate();
+                return year + "年" + mouth + "月" + day + "日";
+            },
+            strToDate: function (date) {
+                return new Date(Date.parse(date.replace(/-/g, "/")));
+            }
+        },
+
+        mounted: function () {
+            this.getNginxUrl();
+            this.getNews();
+        }
+    })
+</script>
+</body>
+</html>

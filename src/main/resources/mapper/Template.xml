@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wejoy.wejoycms.mapper.TemplateMapper">
+
+    <resultMap id="map" type="com.wejoy.wejoycms.entity.TTemplate">
+        <id property="id" column="id"></id>
+    </resultMap>
+
+    <select id="getPathById" resultType="String" parameterType="Long">
+        select TEMPLATE_PATH
+        from t_template
+        where id = #{id}
+    </select>
+
+    <select id="getPathByCode" resultType="String">
+        select TEMPLATE_PATH
+        from t_template t,t_subject s
+        where t.ID = s.TEMPLATE_ID
+        and SUBJECT_CODE = #{code}
+    </select>
+
+    <select id="getPathByArticleId" resultType="String">
+        select TEMPLATE_PATH
+        from t_template t,t_article a
+        where t.ID = a.TEMPLATE_ID
+        and a.ID = #{id}
+    </select>
+
+
+</mapper>

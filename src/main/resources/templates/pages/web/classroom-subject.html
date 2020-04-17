@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>智慧教室</title>
+    <link rel="stylesheet" href="/web/js/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/web/css/common/global.css">
+    <link rel="stylesheet" href="/web/css/common/common.css">
+    <link rel="stylesheet" href="/web/css/classroom-subject.css">
+</head>
+<body>
+<div class="page-container">
+    <div th:replace="pages/web/component::header"></div>
+
+    <div class="page-content">
+        <div class="page-scroll">
+            <div class="page-body">
+
+                <img class="subject-picture"
+                     th:if="${msgAndKid.subjectMsg.subjectPictureList.size() > 0}"
+                     th:src="@{${session.nginxUrl}+${msgAndKid.subjectMsg.subjectPictureList[0].picture}}" alt="">
+
+                <div class="classroom-subject">
+                    <div class="title">
+                        <span class="subject-title"
+                              th:text="${msgAndKid.subjectMsg.subjectName}">
+<!--                        技术支持-->
+                        </span>
+                        <span class="subject-sub-title"
+                              th:text="${msgAndKid.subjectMsg.subjectSubName}">
+<!--                            Technical support-->
+                        </span>
+                        <div class="column-divider"></div>
+                    </div>
+
+                    <img
+                            class="classroom-img"
+                            th:each="info,infoStat : ${msgAndKid.subjectList}"
+                            th:src="@{${session.nginxUrl}+${info.subjectPictureList[0].picture}}" alt="">
+                </div>
+                <!--                class="classroom-img"-->
+                <!--                th:class=""-->
+
+
+            </div>
+
+            <div th:replace="pages/web/component::footer"></div>
+        </div>
+    </div>
+
+</div>
+
+<script src="/web/js/jquery/jquery-3.4.1.min.js"></script>
+<script src="/web/js/layui/layui.all.js"></script>
+<script src="/web/js/common/global.js"></script>
+<script src="/web/js/page/home.js"></script>
+</body>
+</html>

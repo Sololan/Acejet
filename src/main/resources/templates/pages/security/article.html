@@ -1,0 +1,314 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>内容发布管理平台</title>
+    <link rel="stylesheet" href="/securitystatic/js/lib/layui/css/layui.css">
+    <link rel="stylesheet" href="/securitystatic/css/global.css">
+    <link rel="stylesheet" href="/securitystatic/css/common.css">
+</head>
+
+<body class="layui-layout-body">
+<div id="article-container" class="layui-layout layui-layout-admin">
+    <div th:replace="pages/security/base::header"></div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div id="pageList" class="wj-page">
+            <div class="wj-header">
+                <span class="wj-title">文章列表</span>
+            </div>
+            <div class="wj-body">
+                <div id="articleSearch" class="layui-form wj-search">
+                    <div class="layui-form-item wj-search-quick">
+                        <div class="layui-inline">
+                            <div class="layui-input-inline">
+                                <input id="search-title" type="text" class="layui-input" placeholder="请输入文章标题查询"/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <div class="layui-btn-group">
+                                <button type="button" class="layui-btn layui-btn-normal" id="search">查询</button>
+                                <button type="button" class="layui-btn layui-btn-warm" id="reset">重置</button>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <div class="wj-search-toggle"></div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item wj-search-advance">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">文章副标题</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="article-subtitle" class="layui-input" placeholder="文章副标题"/>
+                            </div>
+                        </div>
+                        <!--                        <div class="layui-inline">-->
+                        <!--                            <label class="layui-form-label">文章模板</label>-->
+                        <!--                            <div class="layui-input-inline">-->
+                        <!--                                <select lay-filter="searchTpl">-->
+                        <!--                                    <option value=""></option>-->
+                        <!--                                    <option value="1">文章模板1</option>-->
+                        <!--                                    <option value="2">文章模板2</option>-->
+                        <!--                                    <option value="3">文章模板3</option>-->
+                        <!--                                </select>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                        <div class="layui-inline">
+                            <label class="layui-form-label">启用状态</label>
+                            <div class="layui-input-inline">
+                                <select id="article-status" lay-filter="searchEnabled">
+                                    <option name="statusMain" value="1">启用</option>
+                                    <option name="statusMain" value="0">未启用</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">所属栏目</label>
+                            <div class="layui-input-inline">
+                                <div class="layui-input-inline">
+                                    <select lay-filter="searchSubject" id="searchSubject">
+                                        <option value=""></option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--新增-->
+                        <!--排序方式-->
+                        <div class="layui-inline">
+                            <label class="layui-form-label">查看方式</label>
+                            <div class="layui-input-inline">
+                                <select id="article-sort" lay-filter="searchSort">
+                                    <option name="sortNum" value="1">升序查看</option>
+                                    <option name="sortNum" value="0">倒序查看</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="layui-hide" id="articleTable" lay-filter="article"></table>
+            </div>
+        </div>
+        <div id="pageAddOrEdit" class="wj-page" style="display: none">
+            <div class="wj-header">
+                <div class="wj-back"><i class="layui-icon layui-icon-return"></i>&nbsp;返回上一级</div>
+                <span class="wj-title"></span>
+            </div>
+            <div class="wj-body">
+                <form class="layui-form article-form" action="javascript:;">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">标题</label>
+                        <div class="layui-input-block">
+                            <input id="articleTitle" type="text" class="layui-input" placeholder="请输入标题"
+                                   lay-verify="required" required>
+                            <input id="articleId" type="hidden">
+                        </div>
+                    </div>
+                    <!--<div class="layui-form-item">
+                        <label class="layui-form-label">副标题</label>
+                        <div class="layui-input-block">
+                            <input id="articleSubtitle" type="text" class="layui-input" placeholder="请输入副标题"
+                                   lay-verify="required" required>
+                        </div>
+                    </div>-->
+
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">副标题</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入副标题" class="layui-textarea" id="articleSubtitle"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">是否启用</label>
+                            <div class="layui-input-inline">
+                                <input lay-filter="status" type="checkbox" id="statusP" lay-skin="switch" checked>
+                                <input id="status" type="hidden">
+                            </div>
+                        </div>
+
+                        <!--序号-->
+                        <div class="layui-inline">
+                            <label class="layui-form-label">序号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="sortNum" class="layui-input" placeholder="请输入序号"
+                                       lay-verify="required" required>
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">所属栏目</label>
+                            <div class="layui-input-inline">
+                                <select lay-filter="subject" id="subjects">
+                                    <option value="">请选择所属栏目</option>
+                                </select>
+                            </div>
+                            <input id="subjectId" type="hidden">
+                            <!--                            <div class="layui-input-inline">-->
+                            <!--                                <input type="text" id="subject" lay-filter="subject" class="layui-input">-->
+                            <!--                            </div>-->
+                        </div>
+                        <!--                        <div class="layui-inline">-->
+                        <!--                            <label class="layui-form-label">文章模板</label>-->
+                        <!--                            <div class="layui-input-inline">-->
+                        <!--                                <select lay-filter="tpl">-->
+                        <!--                                    <option value=""></option>-->
+                        <!--                                    <option value="1">文章模板1</option>-->
+                        <!--                                    <option value="2">文章模板2</option>-->
+                        <!--                                    <option value="3">文章模板3</option>-->
+                        <!--                                </select>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">文章简介</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入文章简介" class="layui-textarea" id="articleBrief"></textarea>
+                        </div>
+                    </div>
+                    <!--                    <div class="layui-form-item">
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">图片水印</label>
+                                                <div class="layui-input-inline" style="width: auto" id="watermarkType">
+                                                    <input type="radio" name="watermark" lay-filter="watermark" value="0" title="无" checked>
+                                                    <input type="radio" name="watermark" lay-filter="watermark" value="2" title="文字">
+                                                </div>
+                                            </div>
+                                            <div id="watermark" class="layui-inline" style="display: none">
+                                                <label class="layui-form-label">水印文字</label>
+                                                <div class="layui-input-inline">
+                                                    <input id="watermarkText" type="text" class="layui-input" placeholder="请输入水印文字" >
+                                                </div>
+                                            </div>
+                                        </div>-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">图片上传</label>
+                        <div class="layui-input-block">
+                            <div class="wj-upload">
+                                <button type="button" class="layui-btn layui-btn-normal" id="addImg">添加图片</button>
+                                <!--                                <button type="button" class="layui-btn m-l-10" id="imgUploader">开始上传</button>-->
+                                <div class="wj-upload-list layui-form" lay-filter="uploadList">
+                                    <table class="layui-table">
+                                        <thead>
+                                        <tr>
+                                            <th>图片</th>
+                                            <th>主图</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="articleImgList"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--                    <div class="layui-form-item">-->
+                    <!--                        <div class="layui-inline">-->
+                    <!--                            <label class="layui-form-label">图片水印</label>-->
+                    <!--                            <div class="layui-input-inline" style="width: auto">-->
+                    <!--                                <input type="radio" name="watermark" lay-filter="watermark" value="0" title="无" checked>-->
+                    <!--                                <input type="radio" name="watermark" lay-filter="watermark" value="1" title="LOGO">-->
+                    <!--                                <input type="radio" name="watermark" lay-filter="watermark" value="2" title="文字">-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                        <div id="watermark" class="layui-inline" style="display: none">-->
+                    <!--                            <label class="layui-form-label">水印文字</label>-->
+                    <!--                            <div class="layui-input-inline">-->
+                    <!--                                <input id="watermarkText" type="text" class="layui-input" placeholder="请输入水印文字"-->
+                    <!--                                       lay-verify="required" required>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文章编辑</label>
+                        <div class="layui-input-block">
+                            <textarea id="editor_id" name="content"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+
+                            <!--<button type="button" class="layui-btn m-l-10" id="imgUploader">开始上传</button>
+                            <button class="layui-btn" disabled="disabled" id="waitUploader" style="display:none;">请稍后...正在上传图片</button>
+                            <button class="layui-btn" lay-submit lay-filter="article" id="saveBtn" style="display:none;">保存</button>
+                            <button type="button" class="layui-btn layui-btn-primary article-cancel">取消</button>-->
+
+                            <button type="button" class="layui-btn m-l-10" id="checkBtn">保 存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="enclosurePage" class="wj-page" style="display: none">
+            <div class="wj-header">
+                <div class="wj-back"><i class="layui-icon layui-icon-return"></i>&nbsp;返回上一级</div>
+                <span class="wj-title">文章附件</span>
+            </div>
+            <div class="wj-body">
+                <form action="" class="layui-form" id="enclosureFormId" lay-filter="enclosureFormFilter">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">附件上传</label>
+                        <div class="layui-input-block">
+                            <div class="wj-upload">
+                                <button type="button" class="layui-btn layui-btn-normal" id="addEnclosure">添加附件</button>
+                                <span>仅支持doc|docx|txt|pdf|ppt|pptx</span>
+                                <div class="wj-upload-list layui-form" lay-filter="uploadList">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <table class="clayui-hide" id="enclosureTable" lay-filter="enclosureTableFilter">
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="pages/security/base::footer"></div>
+</div>
+<div th:replace="pages/security/base::pwd"></div>
+<!--确认-->
+<div id="saveBtnModel" class="layui-form" style="display: none;">
+
+    <div class="layui-form-item">
+
+        <button id="confirm" class="layui-btn" lay-submit lay-filter="formDemo" style="margin:30px;">立即提交</button>
+        <button id="cancel" type="reset" class="layui-btn layui-btn-primary" style="margin:30px;">取消</button>
+
+    </div>
+</div>
+
+<!--模版-->
+<script type="text/html" id="toolbarTpl">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="addArticle">新建文章</button>
+    </div>
+</script>
+
+<script type="text/html" id="delEnclosureTpl">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delEnclosure">删除</a>
+</script>
+<script type="text/html" id="barTpl">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs" lay-event="enclosure">附件</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<!--js-->
+<script src="/securitystatic/js/lib/jquery-1.11.3.min.js"></script>
+<script src="/securitystatic/js/lib/layui/layui.all.js"></script>
+<!--<script src="/securitystatic/js/lib/treeSelect.js"></script>-->
+<script src="/securitystatic/js/lib/kindeditor/kindeditor-all-min.js"></script>
+<script src="/securitystatic/js/lib/kindeditor/lang/zh-CN.js"></script>
+<script src="/securitystatic/js/utils/storage-util.js"></script>
+<script src="/securitystatic/js/global.js"></script>
+<script src="/securitystatic/js/page/article.js"></script>
+</body>
+</html>

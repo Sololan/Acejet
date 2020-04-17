@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>合作伙伴</title>
+    <link rel="stylesheet" href="/web/js/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/web/css/common/global.css">
+    <link rel="stylesheet" href="/web/css/common/common.css">
+    <link rel="stylesheet" href="/web/css/partner-subject.css">
+</head>
+<body>
+<div class="page-container">
+    <div th:replace="pages/web/component::header"></div>
+
+    <div class="page-content">
+        <div class="page-scroll">
+            <div class="page-body">
+                <img class="subject-picture"
+                     th:if="${msgAndKid.subjectMsg.subjectPictureList.size() > 0}"
+                     th:src="@{${session.nginxUrl}+${msgAndKid.subjectMsg.subjectPictureList[0].picture}}" alt="">
+
+                <div class="tag-row subject-container">
+                    <span class="partner-tag">
+                        合作伙伴
+                    </span>
+                </div>
+
+                <div class="partner-component-1 subject-container">
+
+                    <div class="content">
+                        <img class="partner-img"
+                             th:if="${someSubject.SHURE.subjectPictureList.size() > 0}"
+                             th:src="@{${session.nginxUrl}+${someSubject.SHURE.subjectPictureList[0].picture}}" alt="">
+                        <span class="right-column">
+                            <div class="partner-title"
+                                 th:text="${someSubject.SHURE.subjectName}">
+                            </div>
+                            <div class="divider-group">
+                                <span class="column-divider"></span>
+                                <span class="column-divider"></span>
+                                <span class="column-divider"></span>
+                                <span class="column-divider"></span>
+                                <span class="column-divider"></span>
+                                <span class="column-divider"></span>
+                                <span class="column-divider"></span>
+                                <span class="column-divider"></span>
+                                <span class="column-divider"></span>
+                            </div>
+                            <div class="partner-description"
+                                 th:utext="${someSubject.SHURE.subjectBrief}">
+                            </div>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="partner-component-2 subject-container">
+                    <div class="content">
+                        <span class="left-panel">
+                            <div class="partner-title"
+                                 th:text="${someSubject.Panasonic.subjectName}">
+                            </div>
+                            <div class="partner-description"
+                                 th:utext="${someSubject.Panasonic.subjectBrief}">
+                            </div>
+                        </span>
+                        <img class="partner-img"
+                             th:if="${someSubject.Panasonic.subjectPictureList.size() > 0}"
+                             th:src="@{${session.nginxUrl}+${someSubject.Panasonic.subjectPictureList[0].picture}}">
+                        <div class="frame"></div>
+                    </div>
+                </div>
+
+                <div class="partner-component-3 subject-container">
+                    <img class="partner-img"
+                         th:if="${someSubject.dandb.subjectPictureList.size() > 0}"
+                         th:src="@{${session.nginxUrl}+${someSubject.dandb.subjectPictureList[0].picture}}">
+                    <span class="right-col">
+                        <div class="partner-title"
+                             th:text="${someSubject.dandb.subjectName}">
+                        </div>
+                        <div class="partner-description"
+                             th:utext="${someSubject.dandb.subjectBrief}">
+                        </div>
+                        <div class="bottom-divider">
+                            <div class="column-divider"></div>
+                        </div>
+                    </span>
+                </div>
+
+                <div class="partner-component-4 subject-container">
+                    <img class="partner-img"
+                         th:if="${someSubject.Lumens.subjectPictureList.size() > 0}"
+                         th:src="@{${session.nginxUrl}+${someSubject.Lumens.subjectPictureList[0].picture}}">
+                    <div class="right-col">
+                        <div class="partner-title">
+                            <span th:text="${someSubject.Lumens.subjectName}">
+                            </span>
+                            <sup class="sup-r"
+                                 th:text="${someSubject.Lumens.subjectSubName}">
+                            </sup>
+                        </div>
+                        <div class="partner-description"
+                             th:utext="${someSubject.Lumens.subjectBrief}">
+                        </div>
+                        <div class="bottom-box"></div>
+                    </div>
+                </div>
+
+                <div class="partner-component-5 subject-container">
+                    <span class="left-col">
+                        <div class="partner-title"
+                             th:text="${someSubject.NEC.subjectName}">
+                        </div>
+                        <div class="divider-group">
+                            <span class="column-divider"></span>
+                            <span class="column-divider"></span>
+                            <span class="column-divider"></span>
+                            <span class="column-divider"></span>
+                            <span class="column-divider"></span>
+                            <span class="column-divider"></span>
+                            <span class="column-divider"></span>
+                            <span class="column-divider"></span>
+                            <span class="column-divider"></span>
+                        </div>
+
+                        <!--                        <img class="nec-tag" src="/web/image/acejet/nec.png" alt="">-->
+                    </span>
+                    <img class="partner-img"
+                         th:if="${someSubject.NEC.subjectPictureList.size() > 0}"
+                         th:src="@{${session.nginxUrl}+${someSubject.NEC.subjectPictureList[0].picture}}">
+                    <span class="right-col">
+                        <div class="partner-description"
+                             th:utext="${someSubject.NEC.subjectBrief}">
+                        </div>
+                    </span>
+                </div>
+
+                <div th:replace="pages/web/component::footer"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="/web/js/jquery/jquery-3.4.1.min.js"></script>
+<script src="/web/js/layui/layui.all.js"></script>
+<script src="/web/js/common/global.js"></script>
+<script src="/web/js/page/home.js"></script>
+</body>
+</html>

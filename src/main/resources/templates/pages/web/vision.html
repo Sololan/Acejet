@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>国际视野</title>
+    <link rel="stylesheet" href="/web/js/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/web/css/common/global.css">
+    <link rel="stylesheet" href="/web/css/common/common.css">
+</head>
+<body style="visibility: hidden">
+<div class="page-container">
+    <div th:replace="pages/web/component::header"></div>
+    <div class="page-content">
+        <div class="page-scroll">
+            <div class="page-body">
+                <div class="page-component" data-type="component9">
+                    <!-- Banner图 -->
+                    <div class="component9-container">
+                        <div class="component-content">
+                            <div class="column-banner">
+                                <img class="column-image" draggable="false"
+                                     th:each="info,infoStat : ${msgAndKid.subjectMsg.subjectPictureList}"
+                                     th:if="${infoStat.index} lt 1" th:src="@{${session.nginxUrl}+${info.picture}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 国际视野-智能教育 -->
+                <div class="page-component" data-type="component12">
+                    <div class="component12-container">
+                        <div class="center-container">
+                            <div class="component-content">
+                                <div class="column-left">
+                                    <img class="column-left-image" draggable="false"
+                                         th:each="info,infoStat : ${someSubject.intelligentEducation.subjectPictureList}"
+                                         th:if="${infoStat.index} lt 1" th:src="@{${session.nginxUrl}+${info.picture}}">
+                                </div>
+                                <div class="column-right">
+                                    <div class="column-right-inner">
+                                        <div class="column-title"
+                                             th:text="${someSubject.intelligentEducation.subjectSubName}"></div>
+                                        <div class="column-sub-title"
+                                             th:text="${someSubject.intelligentEducation.subjectName}"></div>
+                                        <div class="column-divider white"></div>
+                                        <div class="column-describe"
+                                             th:text="${someSubject.intelligentEducation.subjectBrief}"></div>
+                                        <a class="column-more2"
+                                           th:each="info,infoStat : ${someSubject.intelligentEducation.subjectLinkList}"
+                                           th:if="${infoStat.index lt 1 && info.linkUrl eq ''}"
+                                           href="javascript:void(0)">
+                                            <span class="column-more-text"
+                                                  th:each="info,infoStat : ${someSubject.intelligentEducation.subjectLinkList}"
+                                                  th:if="${infoStat.index} lt 1" th:text="@{${info.linkName}}"></span>
+                                            <img class="column-more-icon" draggable="false"
+                                                 src="/web/image/icon-more2.png">
+                                        </a>
+                                        <a class="column-more2"
+                                           th:each="info,infoStat : ${someSubject.intelligentEducation.subjectLinkList}"
+                                           th:if="${infoStat.index lt 1 && info.linkUrl ne ''}" target="_blank"
+                                           th:href="@{${info.linkUrl}}">
+                                            <span class="column-more-text"
+                                                  th:each="info,infoStat : ${someSubject.intelligentEducation.subjectLinkList}"
+                                                  th:if="${infoStat.index} lt 1" th:text="@{${info.linkName}}"></span>
+                                            <img class="column-more-icon" draggable="false"
+                                                 src="/web/image/icon-more2.png">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-component" data-type="component13">
+                    <!-- 国际视野-各类教育 -->
+                    <div class="component13-container">
+                        <div class="center-container">
+                            <div class="component-content">
+                                <div class="column-divider"></div>
+                                <div class="column-row">
+                                    <div class="column-left">
+                                        <div class="column-title"
+                                             th:text="${someSubject.variousEducation.subjectSubName}"></div>
+                                    </div>
+                                    <div class="column-right">
+                                        <div class="column-switch1">
+                                            <a href="javascript:;" class="switch-prev" id="prev-ve">
+                                                <img draggable="false" class="switch-image white"
+                                                     src="/web/image/arrow-white.png">
+                                                <img draggable="false" class="switch-image black"
+                                                     src="/web/image/arrow-black.png">
+                                            </a>
+                                            <a href="javascript:;" class="switch-next" id="next-ve">
+                                                <img draggable="false" class="switch-image white"
+                                                     src="/web/image/arrow-white.png">
+                                                <img draggable="false" class="switch-image black"
+                                                     src="/web/image/arrow-black.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column-sub-title"
+                                     th:text="${someSubject.variousEducation.subjectName}"></div>
+                                <div class="column-list" id="ve-item">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 国际视野-教育机器人 -->
+                <div class="page-component" data-type="component14">
+                    <div class="component14-container">
+                        <div class="center-container">
+                            <div class="component-content">
+                                <div class="column-left">
+                                    <img class="column-left-image" draggable="false"
+                                         th:each="info,infoStat : ${someSubject.educationalRobots.subjectPictureList}"
+                                         th:if="${infoStat.index} lt 1" th:src="@{${session.nginxUrl}+${info.picture}}">
+                                </div>
+                                <div class="column-right">
+                                    <div class="column-title"
+                                         th:text="${someSubject.educationalRobots.subjectSubName}"></div>
+                                    <div class="column-sub-title"
+                                         th:text="${someSubject.educationalRobots.subjectName}"></div>
+                                    <div class="column-divider"></div>
+                                    <div class="column-describe"
+                                         th:text="${someSubject.educationalRobots.subjectBrief}"></div>
+                                    <a class="column-more2"
+                                       th:each="info,infoStat : ${someSubject.educationalRobots.subjectLinkList}"
+                                       th:if="${infoStat.index lt 1 && info.linkUrl eq ''}" href="javascript:voie(0)">
+                                        <span class="column-more-text"
+                                              th:each="info,infoStat : ${someSubject.educationalRobots.subjectLinkList}"
+                                              th:if="${infoStat.index} lt 1" th:text="@{${info.linkName}}"></span>
+                                        <img class="column-more-icon" draggable="false" src="/web/image/icon-more2.png">
+                                    </a>
+                                    <a class="column-more2"
+                                       th:each="info,infoStat : ${someSubject.educationalRobots.subjectLinkList}"
+                                       th:if="${infoStat.index lt 1 && info.linkUrl ne ''}" target="_blank"
+                                       th:href="@{${info.linkUrl}}">
+                                        <span class="column-more-text"
+                                              th:each="info,infoStat : ${someSubject.educationalRobots.subjectLinkList}"
+                                              th:if="${infoStat.index} lt 1" th:text="@{${info.linkName}}"></span>
+                                        <img class="column-more-icon" draggable="false" src="/web/image/icon-more2.png">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- 国际视野-理论理念 -->
+                <div class="page-component" data-type="component15">
+                    <div class="component15-container">
+                        <img draggable="false" class="component-background" src="/web/image/background-green.png">
+                        <div class="center-container">
+                            <div class="component-content">
+                                <div class="column-title" th:text="${someSubject.theoreticalIdea.subjectSubName}"></div>
+                                <div class="column-sub-title"
+                                     th:text="${someSubject.theoreticalIdea.subjectName}"></div>
+                                <div class="column-divider"></div>
+                                <div class="column-list">
+                                    <div class="column-item"
+                                         th:each="info,infoStat : ${someSubject.theoreticalIdea.subjectArticleList}"
+                                         th:if="${infoStat.index} lt 3">
+                                        <div class="column-item-inner">
+                                            <div class="column-item-date" th:text="${info.createTime}">2019-11-27</div>
+                                            <a th:href="@{'/article/'+${info.id}}" class="column-item-title"
+                                               th:text="${info.articleTitle}"></a>
+                                            <div class="column-item-describe" th:text="${info.articleSubtitle}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 国际视野-领军人才 -->
+                <div class="page-component" data-type="component16">
+                    <div class="component16-container">
+                        <div class="center-container">
+                            <div class="component-content">
+                                <div class="column-row">
+                                    <div class="column-left">
+                                        <div class="column-title"
+                                             th:text="${someSubject.leadingTalent.subjectSubName}"></div>
+                                        <div class="column-sub-title"
+                                             th:text="${someSubject.leadingTalent.subjectName}"></div>
+                                        <div class="column-divider"></div>
+                                    </div>
+                                    <div class="column-right">
+                                        <div class="column-switch1">
+                                            <a href="javascript:;" class="switch-prev" id="prev-l">
+                                                <img draggable="false" class="switch-image white"
+                                                     src="/web/image/arrow-white.png">
+                                                <img draggable="false" class="switch-image black"
+                                                     src="/web/image/arrow-black.png">
+                                            </a>
+                                            <a href="javascript:;" class="switch-next" id="next-l">
+                                                <img draggable="false" class="switch-image white"
+                                                     src="/web/image/arrow-white.png">
+                                                <img draggable="false" class="switch-image black"
+                                                     src="/web/image/arrow-black.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column-list" id="l-item">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:replace="pages/web/component::footer"></div>
+        </div>
+    </div>
+</div>
+<script src="/web/js/jquery/jquery-3.4.1.min.js"></script>
+<script src="/web/js/layui/layui.all.js"></script>
+<script src="/web/js/common/global.js"></script>
+<script src="/web/js/page/vision.js"></script>
+</body>
+</html>

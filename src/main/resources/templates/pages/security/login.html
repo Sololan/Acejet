@@ -1,0 +1,57 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>内容发布管理平台</title>
+    <link rel="stylesheet" href="/securitystatic/css/global.css">
+    <link rel="stylesheet" href="/securitystatic/css/common.css">
+</head>
+<body>
+<div id="login-container">
+    <div class="content-background"></div>
+    <div class="content">
+        <div class="system-side">
+            <img src="/securitystatic/img/system_img.png" alt="system">
+        </div>
+        <div class="login-side">
+            <div class="login-side-inner">
+                <div class="logo"></div>
+                <span class="welcome">欢迎来到Acejet管理系统</span>
+                <div class="form-area">
+                    <form th:action="@{/login}" method="post">
+                        <div class="form-item input-group">
+                            <label for="user">
+                                <img src="/securitystatic/img/icon_user.png" alt="user">
+                            </label>
+                            <input id="user" name="username" type="text" placeholder="请输入用户名"/>
+                        </div>
+                        <div class="form-item input-group">
+                            <label for="pwd">
+                                <img src="/securitystatic/img/icon_pwd.png" alt="pwd">
+                            </label>
+                            <input id="pwd" name="password" type="password" placeholder="请输入密码"/>
+                        </div>
+                        <label class="form-item checkbox-group">
+                            <input id="keepUser" type="checkbox"/>
+                            <span class="check-box"></span>
+                            <span class="check-box-label">记住用户名</span>
+                        </label>
+                        <div class="error-group" style="display: none">
+                            <span id="errMsg"></span>
+                        </div>
+                        <button id="login" class="btn-login" disabled type="submit">登录</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="/securitystatic/js/lib/jquery-1.11.3.min.js"></script>
+    <script src="/securitystatic/js/utils/storage-util.js"></script>
+    <script src="/securitystatic/js/page/login.js"></script>
+</div>
+</body>
+</html>

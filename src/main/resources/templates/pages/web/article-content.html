@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>文章内容</title>
+    <link rel="stylesheet" href="/web/js/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/web/css/common/global.css">
+    <link rel="stylesheet" href="/web/css/common/common.css">
+    <link rel="stylesheet" href="/web/css/article-content.css">
+</head>
+<body>
+<div class="page-container">
+    <div th:replace="pages/web/component::header"></div>
+
+    <div class="page-content">
+        <div class="page-scroll">
+            <div class="page-body">
+                <div class="article-top">
+                    <img class="article-picture"
+                         alt=""
+                         src="/web/image/acejet/content.jpg">
+                </div>
+
+                <div class="article subject-container">
+                    <span class="left-col">
+                        <div class="title"
+                             th:text="${article.articleTitle}"></div>
+                        <div class="from"
+                             th:text="${article.articleSubtitle}"></div>
+                        <div class="content"
+                             th:utext="${article.content}"></div>
+                    </span>
+                    <span class="right-col">
+                        <div class="relevant-title"
+                             th:text="${currentSubject.subjectName}"></div>
+                        <!--                            相关内容-->
+                        <div class="relevant-item"
+                             th:each="info,infoStat : ${currentSubject.subjectArticleList}">
+<!--                             th:if="${info.id} != ${article.id}"-->
+                            <div class="item-title">
+                                <a th:href="'/article/'+@{${info.id}}"
+                                   th:text="@{${info.articleTitle}}"></a>
+                            </div>
+                            <div class="item-link"
+                                 th:text="@{${info.articleBrief}}"></div>
+                        </div>
+
+                    </span>
+                </div>
+            </div>
+
+            <div th:replace="pages/web/component::footer"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/web/js/jquery/jquery-3.4.1.min.js"></script>
+<script src="/web/js/layui/layui.all.js"></script>
+<script src="/web/js/common/global.js"></script>
+<script src="/web/js/page/home.js"></script>
+</body>
+</html>

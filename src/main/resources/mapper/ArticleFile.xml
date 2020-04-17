@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wejoy.wejoycms.mapper.ArticleFileMapper">
+
+    <resultMap id="map" type="com.wejoy.wejoycms.entity.TArticleFile">
+        <id property="id" column="id"></id>
+    </resultMap>
+
+    <select id="getFileSByArticleId" resultMap="map">
+        select *
+        from t_article_file
+        where ARTICLE_ID = #{articleId}
+    </select>
+
+    <insert id="saveFile">
+        insert into t_article_file
+        (ARTICLE_ID, FILE_PATH, FILE_TITLE, SORT_NUM)
+        values
+        (#{articleId},#{filePath},#{fileTitle},#{sortNum})
+    </insert>
+
+    <delete id="deleteById">
+        delete from t_article_file
+        where ID = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wejoy.wejoycms.mapper.FriendlyLinkMapper">
+
+    <resultMap id="map" type="com.wejoy.wejoycms.entity.TFriendlyLink">
+        <id property="id" column="id"></id>
+    </resultMap>
+
+    <select id="getAllLinkS" resultMap="map">
+        select * ,(select LINK_TYPE_NAME from t_friendly_link_type where t_friendly_link_type.ID = t_friendly_link.LINK_TYPE_ID) as linkTypeName
+        from t_friendly_link
+        where DELETE_FLAG = 0
+    </select>
+
+    <insert id="insertFriendlyLink">
+        insert into t_friendly_link
+        (LINK_TYPE_ID,LINK_NAME,PICTURE,LINK_URL,SORT_NUM,CREATE_USER,CREATE_USER_NAME,CREATE_TIME)
+        values
+        (#{linkTypeId},#{linkName},#{picture},#{linkUrl},#{sortNum},#{createUser},#{createUserName},#{createTime})
+    </insert>
+
+    <update id="updateFriendlyLinkById">
+        update t_friendly_link
+        <trim prefix="set" suffixOverrides=",">
+            <if test="linkTypeId != null">
+                LINK_TYPE_ID = #{linkTypeId},
+            </if>
+            <if test="linkName != null">
+                LINK_NAME = #{linkName},
+            </if>
+            <if test="linkUrl != null">
+                PICTURE = #{picture},
+            </if>
+            <if test="linkUrl != null">
+                LINK_URL = #{linkUrl},
+            </if>
+            <if test="sortNum != null">
+                SORT_NUM = #{sortNum},
+            </if>
+        </trim>
+        where ID=#{id}
+    </update>
+    <update id="deleteLinkById">
+        update t_friendly_link
+        set DELETE_FLAG = 1
+        where id = #{id}
+    </update>
+
+    <select id="getLinkById" resultMap="map">
+        select * from t_friendly_link
+        where id = #{id}
+    </select>
+
+    <select id="getLinkByCode" resultMap="map">
+        select fl.* from t_friendly_link fl,t_friendly_link_type flt
+        where fl.LINK_TYPE_ID = flt.ID
+        and fl.DELETE_FLAG = 0
+        and flt.LINK_TYPE_CODE = #{code}
+        order by SORT_NUM
+    </select>
+</mapper>

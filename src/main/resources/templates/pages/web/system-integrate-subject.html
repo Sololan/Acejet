@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AV/IT集成</title>
+    <link rel="stylesheet" href="/web/js/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/web/css/common/global.css">
+    <link rel="stylesheet" href="/web/css/common/common.css">
+    <link rel="stylesheet" href="/web/css/system-integrate-subject.css">
+</head>
+<body>
+<div class="page-container">
+    <div th:replace="pages/web/component::header"></div>
+
+    <div class="page-content">
+        <div class="page-scroll">
+            <div class="page-body" id="integrate">
+                <img
+                        class="subject-picture"
+                        th:if="${msgAndKid.subjectMsg.subjectPictureList.size() > 0}"
+                        th:src="@{${session.nginxUrl}+${msgAndKid.subjectMsg.subjectPictureList[0].picture}}" alt="">
+
+                <div class="integrate-subject subject-container">
+                    <div class="left-col">
+                        <div :class="{'nav-tab':'true'=='true','active-tab':curSubject.subjectName==item.subjectName}" v-for="(item, index) in subjectList" v-on:click="pageChange(index)">
+                            <span>{{ item.subjectName }}</span>
+                            <span v-if="curSubject.subjectName==item.subjectName" class="parallelogram"></span>
+                        </div>
+                    </div>
+                    <div class="right-col">
+                        <img v-for="(item, index) in curSubject.subjectPictureList" class="integrate-img" :src="nginxUrl + item.picture">
+                    </div>
+                </div>
+            </div>
+
+            <div th:replace="pages/web/component::footer"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/web/js/jquery/jquery-3.4.1.min.js"></script>
+<script src="/web/js/layui/layui.all.js"></script>
+<script src="/web/js/common/global.js"></script>
+<script src="/web/js/page/home.js"></script>
+<script src="/web/js/vue/polyfill.min.js"></script>
+<script src="/web/js/vue/vue.min.js"></script>
+<script src="/web/js/axios/axios.min.js"></script>
+<script th:inline="javascript" type="text/javascript">
+    var vm = new Vue({
+        name: "integrate",
+        el: "#integrate",
+        data: function () {
+            return {
+                nginxUrl: '',
+                subjectList: '',
+                curSubject: ''
+            }
+        },
+
+        methods: {
+            getIntegrate: function (event) {
+                axios.get('/unique/getSubjectAndPic/integrate')
+                    .then(function (response) {
+                        // console.log(response.data)
+                        vm.subjectList = response.data.data;
+                        vm.curSubject = response.data.data[0];
+                    })
+                    .catch(function (error) {
+                        // console.log(error);
+                    });
+            },
+            getNginxUrl: function (event) {
+                axios.get('/unique/getNginxUrl')
+                    .then(function (response) {
+                        vm.nginxUrl = response.data.data
+                    })
+                    .catch(function (error) {
+                        // console.log(error);
+                    });
+            },
+            pageChange: function (index) {
+                vm.curSubject = vm.subjectList[index]
+            }
+        },
+
+        mounted: function () {
+            this.getNginxUrl();
+            this.getIntegrate();
+        }
+    })
+</script>
+</body>
+</html>

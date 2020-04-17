@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>服务与支持</title>
+    <link rel="stylesheet" href="/web/js/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/web/css/common/global.css">
+    <link rel="stylesheet" href="/web/css/common/common.css">
+    <link rel="stylesheet" href="/web/css/support-subject.css">
+</head>
+<body>
+<div class="page-container">
+    <div th:replace="pages/web/component::header"></div>
+
+    <div class="page-content" id="support">
+        <div class="page-scroll">
+            <div class="page-body">
+
+                <img
+                        class="subject-picture"
+                        th:if="${msgAndKid.subjectMsg.subjectPictureList.size() > 0}"
+                        th:src="@{${session.nginxUrl}+${msgAndKid.subjectMsg.subjectPictureList[0].picture}}" alt="">
+
+                <div class="support-sub-subject subject-container">
+                    <div class="title">
+                        <span class="subject-title"
+                              th:text="${someSubject.techSupport.subjectName}">
+                        </span>
+                        <span class="subject-sub-title"
+                              th:text="${someSubject.techSupport.subjectSubName}">
+                        </span>
+
+                        <div class="column-divider"></div>
+                    </div>
+                    <div class="subject-content">
+                        <a :href="nginxUrl + item.filePath" class="doc-download" v-for="(item, index) in articleAndFile" v-if="item.filePath != null">
+                            <span>{{ item.articleTitle }}</span>
+                            <img class="icon-download plain" src="/web/image/acejet/icon-download.png" alt="">
+                            <img class="icon-download orange" src="/web/image/acejet/icon-download-orange.png" alt="">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="share-sub-subject subject-container">
+                    <div class="title">
+                        <span class="subject-title"
+                              th:text="${someSubject.techSharing.subjectName}">
+                        </span>
+                        <span class="subject-sub-title"
+                              th:text="${someSubject.techSharing.subjectSubName}">
+                        </span>
+                    </div>
+                    <div class="column-divider"></div>
+                    <div class="subject-content">
+                        <div class="share-item"
+                             th:each="info,infoStat : ${someSubject.techSharing.subjectArticleList}">
+                            <img class="share-img"
+                                 th:if="${info.articlePictureList.size() > 0}"
+                                 th:src="@{${session.nginxUrl}+${info.articlePictureList[0].picture}}">
+                            <span class="share-trapezoid"></span>
+                            <span class="share-item-right">
+                                    <div class="share-text"
+                                         th:text="@{${info.articleTitle}}">
+                                    </div>
+                                    <a class="column-more1"
+                                       th:href="'/article/'+@{${info.id}}">
+                                        <span class="column-more-text">查看详情</span>
+                                        <span class="more-icon"></span>
+                                        <img class="column-more-icon" draggable="false"
+                                             src="/web/image/acejet/icon-arrow.png">
+                                    </a>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:replace="pages/web/component::footer"></div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/web/js/jquery/jquery-3.4.1.min.js"></script>
+<script src="/web/js/vue/polyfill.min.js"></script>
+<script src="/web/js/layui/layui.all.js"></script>
+<script src="/web/js/common/global.js"></script>
+<script src="/web/js/page/home.js"></script>
+<script src="/web/js/vue/vue.min.js"></script>
+<script src="/web/js/axios/axios.min.js"></script>
+<script th:inline="javascript" type="text/javascript">
+    var vm = new Vue({
+        name: "support",
+        el: "#support",
+        data: function () {
+            return {
+                nginxUrl: '',
+                articleAndFile: []
+            }
+        },
+
+        methods: {
+            getSupport: function (event) {
+                axios.get('/unique/getArticleAndFile/techSupport')
+                    .then(function (response) {
+                        var result = response.data.data
+                        for(var i in result.subjectArticleList){
+                            var tem = {};
+                            tem.articleTitle = result.subjectArticleList[i].articleTitle
+                            for (var j in result.subjectArticleList[i].articleFileList){
+                                tem.filePath = result.subjectArticleList[i].articleFileList[j].filePath
+                            }
+                            vm.articleAndFile.push(tem);
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            getNginxUrl: function (event) {
+                axios.get('/unique/getNginxUrl')
+                    .then(function (response) {
+                        vm.nginxUrl = response.data.data
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        },
+
+        mounted: function () {
+            this.getNginxUrl();
+            this.getSupport();
+        }
+    })
+</script>
+</body>
+</html>

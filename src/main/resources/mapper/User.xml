@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wejoy.wejoycms.mapper.UserMapper">
+
+    <resultMap id="map" type="com.wejoy.wejoycms.entity.TUser">
+        <id property="id" column="id"></id>
+    </resultMap>
+
+    <select id="getUser" resultMap="map">
+        select *
+        from t_user
+        where id = 1
+    </select>
+
+    <select id="findByUsername" resultMap="map">
+        select * from t_user
+        where USERNAME = #{username}
+    </select>
+
+    <update id="setPassword">
+        update t_user set PASSWORD = #{password}
+        where USERNAME = #{username}
+    </update>
+</mapper>

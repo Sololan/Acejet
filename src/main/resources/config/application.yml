@@ -1,0 +1,65 @@
+spring:
+  thymeleaf:
+    prefix: classpath:templates/
+    cache: false
+  profiles:
+    active: dev
+  application:
+    name: web
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+  boot:
+    admin:
+      client:
+        url: ${spring-boot-admin-url}
+        instance:
+          prefer-ip: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  servlet:
+    multipart:
+      # 单文件最大
+      max-file-size: 500MB
+      # 一次上传最大
+      max-request-size: 500MB
+  security:
+    user:
+      name: "admin"
+      password: "1"
+      roles: "admin"
+
+
+
+logging:
+  level:
+    root: info
+    org.springframework: warn
+    com:
+      wejoy:
+        wejoycms:
+          mapper: debug
+
+swagger:
+  title: "wisdom rest API"
+  description: "wisdom web API"
+  version: "v1.0.0"
+
+mybatis:
+  type-aliases-package: com.wejoy.wejoycms.entity
+  mapperPackage: com.wejoy.wejoycms.mapper
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+pagehelper:
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+management:
+  health:
+    redis:
+      enabled: false
+

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wejoy.wejoycms.mapper.SubjectLinkMapper">
+
+    <resultMap id="map" type="com.wejoy.wejoycms.entity.TSubjectLink">
+        <id property="id" column="id"></id>
+    </resultMap>
+
+    <select id="getLinkSBySubjectId" resultMap="map">
+        select *
+        from t_subject_link
+        where SUBJECT_ID=#{subjectId}
+        order by SORT_NUM
+    </select>
+
+    <select id="getLinkById" resultMap="map">
+        select *
+        from t_subject_link
+        where ID=#{id}
+    </select>
+
+    <delete id="deleteLinkById">
+        delete from t_subject_link
+        where ID=#{id}
+    </delete>
+
+    <update id="updateLinkById">
+        update t_subject_link
+        <trim prefix="set" suffixOverrides=",">
+            <if test="subjectId != null">
+                SUBJECT_ID = #{subjectId},
+            </if>
+            <if test="linkName != null">
+                LINK_NAME = #{linkName},
+            </if>
+            <if test="linkType != null">
+                LINK_TYPE = #{linkType},
+            </if>
+            <if test="linkUrl != null">
+                LINK_URL = #{linkUrl},
+            </if>
+            <if test="sortNum != null">
+                SORT_NUM = #{sortNum},
+            </if>
+        </trim>
+        where ID=#{id}
+    </update>
+
+    <insert id="insertLinkBySubjectId">
+        insert into t_subject_link
+        (SUBJECT_ID,LINK_NAME, LINK_TYPE, LINK_URL,SORT_NUM)
+        values
+        (#{subjectId},#{linkName}, #{linkType}, #{linkUrl},#{sortNum})
+    </insert>
+
+    <select id="getLinkSSortASC" resultMap="map">
+        select *
+        from t_subject_link
+        order by SORT_NUM ASC
+    </select>
+
+    <select id="getLinkSSortDESC" resultMap="map">
+        select *
+        from t_subject_link
+        order by SORT_NUM DESC
+    </select>
+
+</mapper>

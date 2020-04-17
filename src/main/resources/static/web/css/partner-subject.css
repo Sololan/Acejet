@@ -1,0 +1,264 @@
+.tag-row {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-bottom: 0.56rem;
+}
+
+.tag-row .partner-tag {
+    width: 2.2rem;
+    height: 0.3rem;
+    background: rgba(54, 124, 248, 1);
+
+    margin-right: 0.9rem;
+    text-align: center;
+
+    font-size: 0.16rem;
+    /*font-family: Microsoft YaHei;*/
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+    line-height: 0.3rem;
+}
+
+.partner-title {
+    font-size: 0.36rem;
+    /*font-family: DIN Black;*/
+    font-weight: 400;
+    color: rgba(54, 124, 248, 1);
+    line-height: 0.36rem;
+}
+
+/* partner-component-1 */
+
+.partner-component-1 {
+    padding-bottom: 0.81rem;
+    display: block;
+}
+
+.divider-group {
+    display: flex;
+    justify-content: space-between;
+    width: 1.4rem;
+    margin: 0.31rem 0 0.3rem;
+}
+
+.divider-group .column-divider {
+    width: 0.12rem;
+    height: 0.05rem;
+}
+
+.partner-component-1 .content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.partner-component-1 .partner-img {
+    width: 4.6rem;
+    height: 3.4rem;
+    flex: none;
+}
+
+.partner-description {
+    font-size: 0.16rem;
+    /*font-family: Microsoft YaHei;*/
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+    line-height: 0.30rem;
+    /* 2.4 = 0.3 * 8*/
+    height: 2.4rem;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* 多行溢出...*/
+    /*display: -webkit-box;*/
+    /*-webkit-line-clamp: 8;*/
+    /*-webkit-box-orient: vertical;*/
+}
+
+.partner-description > span::before {
+    content: '\3000\3000';
+}
+
+/*.partner-description > p {*/
+/*    margin-bottom: 0.08rem;*/
+/*}*/
+
+/*.partner-description > p:last-of-type {*/
+/*    margin: 0;*/
+/*}*/
+
+.partner-component-1 .right-column {
+    width: 7.15rem;
+    /*height: 2.44rem;*/
+    margin: auto 0;
+}
+
+/* partner-component-2 */
+.partner-component-2 {
+    padding-bottom: 1.51rem;
+    position: relative;
+}
+
+.partner-component-2 .content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.partner-component-2 .left-panel {
+    width: 6.40rem;
+    height: 3.88rem;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: -0.05rem 0 0.05rem 0 rgba(0, 0, 0, 0.15);
+
+    box-sizing: border-box;
+    margin: auto 0;
+    padding: 0.28rem 0.15rem 0.53rem 0.28rem;
+
+    position: relative;
+    z-index: 1;
+    margin-right: -2.2rem;
+}
+
+.partner-component-2 .partner-description {
+    margin-top: 0.44rem;
+}
+
+.partner-component-2 .partner-img {
+    width: 7.80rem;
+    height: 4.50rem;
+}
+
+.partner-component-2 .frame {
+    position: absolute;
+    left: 2.48rem;
+    bottom: 0.9rem;
+    z-index: -1;
+
+    width: 6.40rem;
+    height: 3.30rem;
+    border: 0.06rem solid rgba(225, 138, 131, 1);
+}
+
+/* partner-component-3 */
+.partner-component-3 {
+    padding-bottom: 0.97rem;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.partner-component-3 .partner-img {
+    width: 3.48rem;
+    height: 3.84rem;
+}
+
+.partner-component-3 .right-col {
+    height: 3rem;
+    margin: auto 0;
+}
+
+.partner-component-3 .partner-description {
+    width: 7.79rem;
+    /*height: 2.37rem;*/
+
+    /* -7 line-height   */
+    margin-top: 0.21rem;
+    margin-bottom: 0.38rem;
+}
+
+.partner-component-3 .bottom-divider {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.partner-component-3 .column-divider {
+    width: 0.70rem;
+    height: 0.03rem;
+    background: rgba(54, 124, 248, 1);
+}
+
+/* partner-component-4 */
+.partner-component-4 .partner-img {
+    width: 4.20rem;
+    height: 4.76rem;
+}
+
+.partner-component-4 .right-col {
+    box-sizing: border-box;
+
+    width: 7.80rem;
+    height: 4.76rem;
+    background: rgba(226, 232, 244, 1);
+
+    padding: 0.55rem 0.28rem 0 0.62rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sup-r {
+    font-size: 0.18rem;
+    /*font-family: DIN Black;*/
+    font-weight: 400;
+    color: rgba(54, 124, 248, 1);
+    line-height: 0.30rem;
+}
+
+.partner-component-4 .partner-description {
+    /*224 + 14*/
+    /*height: 2.41rem;*/
+}
+
+.partner-component-4 .bottom-box {
+    width: 4.27rem;
+    height: 0.73rem;
+    background: rgba(255, 255, 255, 1);
+    align-self: flex-end;
+    margin-right: -0.28rem;
+}
+
+.partner-component-5 {
+    /*88 + 400*/
+    height: 4.88rem;
+    padding-bottom: 0.6rem;
+}
+
+.partner-component-5 .left-col {
+    width: 2.18rem;
+    position: relative;
+}
+
+.partner-component-5 .nec-tag {
+    width: 4.38rem;
+    height: 0.41rem;
+
+    position: absolute;
+    left: 1rem;
+    bottom: 0.45rem;
+}
+
+.partner-component-5 .partner-title {
+    margin: 0.94rem 0 1.29rem 0;
+}
+
+.partner-component-5 .partner-img {
+    width: 5.55rem;
+    height: 4.00rem;
+
+    margin-top: 0.88rem;
+}
+
+.partner-component-5 .right-col {
+    margin-top: 0.88rem;
+    box-sizing: border-box;
+    width: 4.27rem;
+    padding-left: 0.75rem;
+}
+
+.partner-component-5 .partner-description {
+    /*width: 3.38rem;*/
+    height: 3.9rem;
+
+    /*-webkit-line-clamp: 15;*/
+}

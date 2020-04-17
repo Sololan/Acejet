@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>本院概况</title>
+    <link rel="stylesheet" href="/web/js/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/web/css/common/global.css">
+    <link rel="stylesheet" href="/web/css/common/common.css">
+</head>
+<body style="visibility: hidden">
+<div class="page-container">
+    <div th:replace="pages/web/component::header"></div>
+    <div class="page-content">
+        <div class="page-scroll">
+            <div class="page-body">
+                <img draggable="false" class="page-background" src="/web/image/background-jiie.png">
+                <div class="page-component" data-type="component9">
+                    <!-- Banner图 -->
+                    <div class="component9-container">
+                        <div class="component-content">
+                            <div class="column-banner">
+                                <img class="column-image" draggable="false"
+                                     th:each="info,infoStat : ${msgAndKid.subjectMsg.subjectPictureList}"
+                                     th:if="${infoStat.index} lt 1" th:src="@{${session.nginxUrl}+${info.picture}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 本院概况-关于我们 -->
+                <div class="page-component" data-type="component18">
+                    <div class="component18-container">
+                        <div class="center-container">
+                            <div class="component-content">
+                                <div class="column-left">
+                                    <div class="column-title" th:text="${someSubject.aboutUs.subjectSubName}"></div>
+                                    <div class="column-sub-title" th:text="${someSubject.aboutUs.subjectName}"></div>
+                                    <div class="column-divider2"></div>
+                                    <div class="column-describe" th:text="${someSubject.aboutUs.subjectBrief}"></div>
+                                    <a class="column-more1"
+                                       th:each="info,infoStat : ${someSubject.aboutUs.subjectLinkList}"
+                                       th:if="${infoStat.index lt 1 && info.linkUrl eq ''}" href="javascript:void(0)">
+                                        <span class="column-more-text" th:text="@{${info.linkName}}"></span>
+                                        <img class="column-more-icon" draggable="false" src="/web/image/icon-more1.png">
+                                    </a>
+                                    <a class="column-more1"
+                                       th:each="info,infoStat : ${someSubject.aboutUs.subjectLinkList}"
+                                       th:if="${infoStat.index lt 1 && info.linkUrl ne ''}" target="_blank"
+                                       th:href="@{${info.linkUrl}}">
+                                        <span class="column-more-text" th:text="@{${info.linkName}}"></span>
+                                        <img class="column-more-icon" draggable="false" src="/web/image/icon-more1.png">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 本院概况-服务范围 -->
+                <div class="page-component" data-type="component19">
+                    <div class="component19-container">
+                        <div class="center-container">
+                            <div class="component-content">
+                                <div class="column-left">
+                                    <img draggable="false" class="column-left-image"
+                                         th:each="info,infoStat : ${someSubject.services.subjectPictureList}"
+                                         th:if="${infoStat.index} lt 1" th:src="@{${session.nginxUrl}+${info.picture}}">
+                                </div>
+                                <div class="column-right">
+                                    <div class="column-title" th:text="${someSubject.services.subjectSubName}"></div>
+                                    <div class="column-sub-title" th:text="${someSubject.services.subjectName}"></div>
+                                    <div class="column-list">
+                                        <div class="column-item">
+                                            <div class="column-item-title">技术研发</div>
+                                        </div>
+                                        <div class="column-item">
+                                            <div class="column-item-title">成果转化</div>
+                                        </div>
+                                        <div class="column-item">
+                                            <div class="column-item-title">人才培养</div>
+                                        </div>
+                                    </div>
+                                    <div class="column-describe" th:text="${someSubject.services.subjectBrief}"></div>
+                                    <a class="column-more1"
+                                       th:each="info,infoStat : ${someSubject.services.subjectLinkList}"
+                                       th:if="${infoStat.index lt 1 && info.linkUrl eq ''}" href="javascript:void(0)">
+                                        <span class="column-more-text" th:text="@{${info.linkName}}"></span>
+                                        <img class="column-more-icon" draggable="false" src="/web/image/icon-more1.png">
+                                    </a>
+                                    <a class="column-more1"
+                                       th:each="info,infoStat : ${someSubject.services.subjectLinkList}"
+                                       th:if="${infoStat.index lt 1 && info.linkUrl ne ''}" target="_blank"
+                                       th:href="@{${info.linkUrl}}">
+                                        <span class="column-more-text" th:text="@{${info.linkName}}"></span>
+                                        <img class="column-more-icon" draggable="false" src="/web/image/icon-more1.png">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="page-component" data-type="component20">
+                    <div class="component20-container">
+                        <div class="center-container">
+                            <div class="component-content">
+                                <div class="column-left">
+                                    <div class="column-describe-background">
+                                        <div class="column-describe" th:text="${someSubject.news.subjectBrief}">
+                                            重磅！中央发布深化教育教学改革
+                                            提高义务教育质量的意见重磅提高义务教育质量的意见重磅
+                                        </div>
+                                    </div>
+                                    <div class="column-left-inner">
+                                        <div class="column-title" th:text="${someSubject.news.subjectSubName}">News
+                                        </div>
+                                        <div class="column-sub-title" th:text="${someSubject.news.subjectName}">新闻中心
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column-center">
+                                    <div class="column-list" id="n-item">
+                                        <a href="javascript:;" class="column-item">
+                                            <div class="column-item-date">2019-11-27</div>
+                                            <div class="column-item-title">中央发布全面提高义务教育质量的意见</div>
+                                            <div class="column-item-describe">
+                                                重磅！中央发布深化教育教学改革全面提高义务教育质量的意见重磅重磅中央发布深化教重磅中央
+                                                重磅！中央发布深化教育教学改革全面提高义务教育质量的意见重磅重磅中央发布深化央发布深化教育教学改革全面提高义务教育质量的意见
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="column-right">
+                                    <div class="column-switch1">
+                                        <a href="javascript:;" class="switch-prev" id="prev-n">
+                                            <img draggable="false" class="switch-image white"
+                                                 src="/web/image/arrow-white.png">
+                                            <img draggable="false" class="switch-image black"
+                                                 src="/web/image/arrow-black.png">
+                                        </a>
+                                        <a href="javascript:;" class="switch-next" id="next-n">
+                                            <img draggable="false" class="switch-image white"
+                                                 src="/web/image/arrow-white.png">
+                                            <img draggable="false" class="switch-image black"
+                                                 src="/web/image/arrow-black.png">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-component" data-type="component21">
+                    <!-- 本院概况-人才团队 -->
+                    <div class="component21-container">
+                        <div class="center-container">
+                            <div class="component-content">
+                                <div class="column-row">
+                                    <div class="column-left">
+                                        <div class="column-title" th:text="${someSubject.teams.subjectSubName}"></div>
+                                        <div class="column-sub-title" th:text="${someSubject.teams.subjectName}"></div>
+                                        <div class="column-divider3"></div>
+                                    </div>
+                                    <div class="column-right">
+                                        <div class="column-switch1">
+                                            <a href="javascript:;" class="switch-prev" id="prev-t">
+                                                <img draggable="false" class="switch-image white"
+                                                     src="/web/image/arrow-white.png">
+                                                <img draggable="false" class="switch-image black"
+                                                     src="/web/image/arrow-black.png">
+                                            </a>
+                                            <a href="javascript:;" class="switch-next" id="next-t">
+                                                <img draggable="false" class="switch-image white"
+                                                     src="/web/image/arrow-white.png">
+                                                <img draggable="false" class="switch-image black"
+                                                     src="/web/image/arrow-black.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column-list" id="t-item">
+                                    <div class="column-item"
+                                         th:each="info,infoStat : ${someSubject.teams.subjectArticleList}"
+                                         th:if="${infoStat.index} lt 4">
+                                        <a th:href="@{'/article/'+${info.id}}" class="column-item-inner">
+                                            <div class="column-div">
+                                                <div class="column-item-divider"></div>
+                                                <div class="column-item-title" th:text="${info.articleTitle}"></div>
+                                            </div>
+                                            <img draggable="false" class="column-item-image"
+                                                 th:src="@{${session.nginxUrl}+${info.picture}}">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="page-component" data-type="component22">
+                    <!-- 本院概况-荣誉奖项 -->
+                    <div class="component22-container">
+                        <div class="center-container">
+                            <div class="component-content">
+                                <div class="column-title" th:text="${someSubject.honoraryAwary.subjectSubName}"></div>
+                                <div class="column-sub-title" th:text="${someSubject.honoraryAwary.subjectName}"></div>
+                                <div class="column-list" id="h-item">
+                                    <a href="javascript:;" class="column-item">
+                                        <img draggable="false" class="column-image" src="/web/image/demo-img.png">
+                                    </a>
+                                    <a href="javascript:;" class="column-item">
+                                        <img draggable="false" class="column-image" src="/web/image/demo-img.png">
+                                    </a>
+                                    <a href="javascript:;" class="column-item">
+                                        <img draggable="false" class="column-image" src="/web/image/demo-img.png">
+                                    </a>
+                                    <a href="javascript:;" class="column-item">
+                                        <img draggable="false" class="column-image" src="/web/image/demo-img.png">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="page-component" data-type="component23">
+                    <!-- 本院概况-国际资源 -->
+                    <div class="component23-container">
+                        <div class="component-row">
+                            <img draggable="false" class="component-background"
+                                 th:each="info,infoStat : ${someSubject.internationalResources.subjectPictureList}"
+                                 th:if="${infoStat.index} lt 1" th:src="@{${session.nginxUrl}+${info.picture}}">
+                        </div>
+                        <div class="center-container">
+                            <div class="component-content">
+                                <div class="column-left">
+                                    <div class="column-row">
+                                        <div class="column-divider3"></div>
+                                        <div class="column-title"
+                                             th:text="${someSubject.internationalResources.subjectSubName}"></div>
+                                    </div>
+                                    <div class="column-sub-title"
+                                         th:text="${someSubject.internationalResources.subjectName}"></div>
+                                    <div class="column-item">
+                                        <div class="column-item-div">
+                                            <div class="column-item-div2">
+                                                <div class="column-item-title">AIA</div>
+                                            </div>
+                                            <div class="column-item-sub-title">日本国际高度信息化研究所株式会社</div>
+                                        </div>
+                                        <div class="column-item-describe"
+                                             th:text="${someSubject.internationalResources.subjectBrief}"></div>
+                                    </div>
+                                    <a class="column-more1 wide"
+                                       th:each="info,infoStat : ${someSubject.internationalResources.subjectLinkList}"
+                                       th:if="${infoStat.index lt 1 && info.linkUrl eq ''}" href="javascript:void(0)">
+                                        <span class="column-more-text" th:text="@{${info.linkName}}"></span>
+                                        <img class="column-more-icon" draggable="false" src="/web/image/icon-more1.png">
+                                    </a>
+                                    <a class="column-more1 wide"
+                                       th:each="info,infoStat : ${someSubject.internationalResources.subjectLinkList}"
+                                       th:if="${infoStat.index lt 1 && info.linkUrl ne ''}" target="_blank"
+                                       th:href="@{${info.linkUrl}}">
+                                        <span class="column-more-text" th:text="@{${info.linkName}}"></span>
+                                        <img class="column-more-icon" draggable="false" src="/web/image/icon-more1.png">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="page-component" data-type="component24">
+                    <!-- 本院概况-孵化企业 -->
+                    <div class="component24-container">
+                        <div class="center-container">
+                            <div class="component-content">
+                                <div class="column-row">
+                                    <div class="column-title">Incubate enterprise</div>
+                                    <div class="column-divider3"></div>
+                                </div>
+                                <div class="column-sub-title">孵化企业</div>
+                                <div class="column-list">
+                                    <a class="column-item" th:each="info,infoStat : ${incubate}"
+                                       th:if="${infoStat.index lt 5 && info.linkUrl eq ''}" href="javascript:void(0)">
+                                        <img draggable="false" class="column-image"
+                                             th:src="@{${session.nginxUrl}+${info.picture}}">
+                                    </a>
+                                    <a class="column-item" th:each="info,infoStat : ${incubate}"
+                                       th:if="${infoStat.index lt 5 && info.linkUrl ne ''}" target="_blank"
+                                       th:href="@{${info.linkUrl}}">
+                                        <img draggable="false" class="column-image"
+                                             th:src="@{${session.nginxUrl}+${info.picture}}">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="page-component" data-type="component25">
+                    <!-- 本院概况-联系我们 -->
+                    <div class="component25-container">
+                        <div class="center-container">
+                            <div class="component-content">
+                                <div class="column-left">
+                                    <div class="column-row">
+                                        <div class="column-divider3"></div>
+                                        <div class="column-title"
+                                             th:text="${someSubject.contactUs.subjectSubName}"></div>
+                                    </div>
+                                    <div class="column-sub-title" th:text="${someSubject.contactUs.subjectName}"></div>
+                                    <div class="column-describe" th:text="${someSubject.contactUs.subjectBrief}"></div>
+                                    <img draggable="false" class="column-wave" src="/web/image/icon-wave.png">
+                                    <div class="column-divider4"></div>
+                                    <div class="column-list">
+                                        <div class="column-item">
+                                            <div class="column-item-label">地址:</div>
+                                            <div class="column-item-value">江苏省南京市鼓楼区水佑岗6号万古产业园301室</div>
+                                        </div>
+                                        <div class="column-item">
+                                            <div class="column-item-label">联系:</div>
+                                            <div class="column-item-value">025-83328886</div>
+                                        </div>
+                                        <div class="column-item">
+                                            <div class="column-item-label">邮箱:</div>
+                                            <div class="column-item-value">jiaoyanyuan@yeah.net</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:replace="pages/web/component::footer"></div>
+        </div>
+    </div>
+</div>
+<script src="/web/js/jquery/jquery-3.4.1.min.js"></script>
+<script src="/web/js/layui/layui.all.js"></script>
+<script src="/web/js/common/global.js"></script>
+<script src="/web/js/page/overview.js"></script>
+</body>
+</html>

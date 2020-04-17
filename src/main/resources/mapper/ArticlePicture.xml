@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wejoy.wejoycms.mapper.ArticlePictureMapper">
+
+    <resultMap id="map" type="com.wejoy.wejoycms.entity.TArticlePicture">
+        <id property="id" column="id"></id>
+    </resultMap>
+
+    <select id="getPictureSByArticleId" resultMap="map">
+        select *
+        from t_article_picture
+        where ARTICLE_ID = #{articleId}
+    </select>
+
+    <insert id="insertPictureByArticle">
+        insert into t_article_picture
+        (ARTICLE_ID, PICTURE, PICTURE_TYPE<if test="pictureTitle != null">,PICTURE_TITLE</if>,SORT_NUM,WATERMARK,WATERMARK_TEXT)
+        values
+        (#{articleId},#{picture},#{pictureType}<if test="pictureTitle != null">,#{pictureTitle}</if>,
+        #{sortNum},#{watermark},#{watermarkText})
+    </insert>
+
+    <delete id="deletePictureByArticleId">
+        delete from t_article_picture
+        where ARTICLE_ID = #{articleId}
+    </delete>
+
+    <update id="updatePictureType">
+        update t_article_picture
+        set PICTURE_TYPE = 0
+        where ARTICLE_ID = #{articleId}
+    </update>
+
+</mapper>

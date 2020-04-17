@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <link rel="stylesheet" href="/web/js/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/web/css/common/global.css">
+    <link rel="stylesheet" href="/web/css/common/common.css">
+</head>
+<body style="visibility: hidden">
+<div class="page-container">
+    <div th:replace="pages/web/component::articleHeader"></div>
+    <div class="page-content">
+        <div class="page-scroll">
+            <div class="page-body">
+                <div class="page-component" data-type="component26">
+                    <!-- 文章 -->
+                    <div class="component26-container">
+                        <div class="center-container">
+                            <div class="component-content">
+                                <div class="column-left">
+                                    <div class="column-header" th:text="${article.articleTitle}">我是标题</div>
+                                    <div class="column-body" th:utext="${article.content}">
+                                        我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内
+                                        容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是
+                                        内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我
+                                        是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容
+                                        我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内
+                                        容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是
+                                        内容
+                                    </div>
+                                </div>
+                                <div class="column-right">
+                                    <div class="column-list">
+                                        <div class="column-item" th:each="info,infoStat : ${article.articlePictureList}"
+                                             th:if="${info.pictureType ne 1}">
+                                            <img draggable="false" class="column-image"
+                                                 th:src="@{${session.nginxUrl}+${info.picture}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:replace="pages/web/component::footer"></div>
+        </div>
+    </div>
+</div>
+<script src="/web/js/jquery/jquery-3.4.1.min.js"></script>
+<script src="/web/js/layui/layui.all.js"></script>
+<script src="/web/js/common/global.js"></script>
+</body>
+</html>

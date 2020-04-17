@@ -1,0 +1,65 @@
+@media (min-width: 1024px) {
+    html {
+        font-size: 53.3333px;
+    }
+}
+
+@media (min-width: 1152px) {
+    html {
+        font-size: 60px;
+    }
+}
+
+@media (min-width: 1200px) {
+    html {
+        font-size: 62.5px;
+    }
+}
+
+@media (min-width: 1280px) {
+    html {
+        font-size: 66.6667px;
+    }
+}
+
+@media (min-width: 1360px) {
+    html {
+        font-size: 70.8333px;
+    }
+}
+
+@media (min-width: 1366px) {
+    html {
+        font-size: 71.1458px;
+    }
+}
+
+@media (min-width: 1400px) {
+    html {
+        font-size: 72.9167px;
+    }
+}
+
+@media (min-width: 1440px) {
+    html {
+        font-size: 75px;
+    }
+}
+
+@media (min-width: 1600px) {
+    html {
+        font-size: 83.3333px;
+    }
+}
+
+@media (min-width: 1680px) {
+    html {
+        font-size: 87.5px;
+    }
+}
+
+@media (min-width: 1920px) {
+    html {
+        font-size: 100px;
+    }
+}

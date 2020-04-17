@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wejoy.wejoycms.mapper.SubjectPictureMapper">
+
+    <resultMap id="map" type="com.wejoy.wejoycms.entity.TSubjectPicture">
+        <id property="id" column="id"></id>
+    </resultMap>
+
+    <select id="getPictureById" resultMap="map">
+        select *
+        from t_subject_picture
+        where ID=#{id}
+    </select>
+
+    <select id="getPictureSBySubjectId" resultMap="map">
+        select *
+        from t_subject_picture
+        where SUBJECT_ID=#{subjectId}
+    </select>
+
+    <select id="getPictureSByPictureType" resultMap="map">
+        select *
+        from t_subject_picture
+        where PICTURE_TYPE=#{pictureType}
+    </select>
+
+    <select id="getPictureSByWatermark" resultMap="map">
+        select *
+        from t_subject_picture
+        where WATERMARK=#{watermark}
+    </select>
+
+    <delete id="deletePictureById">
+        delete from t_subject_picture
+        where ID=#{id}
+    </delete>
+
+    <insert id="insertPictureBySubjectId">
+        insert into t_subject_picture
+        (SUBJECT_ID,PICTURE,PICTURE_TITLE,SORT_NUM,PICTURE_TYPE,WATERMARK,WATERMARK_TEXT)
+        values
+        (#{subjectId},#{picture},#{pictureTitle},#{sortNum},#{pictureType},#{watermark},#{watermarkText})
+    </insert>
+
+    <select id="getPictureSSortASC" resultMap="map">
+        select *
+        from t_subject_picture
+        order by SORT_NUM ASC
+    </select>
+
+    <select id="getPictureSSortDESC" resultMap="map">
+        select *
+        from t_subject_picture
+        order by SORT_NUM DESC
+    </select>
+
+    <update id="updatePictureById">
+        update t_subject_picture
+        <trim prefix="set" suffixOverrides=",">
+            <if test="subjectId != null">
+                SUBJECT_ID = #{subjectId},
+            </if>
+            <if test="picture != null">
+                PICTURE = #{picture},
+            </if>
+            <if test="pictureTitle != null">
+                PICTURE_TITLE = #{pictureTitle},
+            </if>
+            <if test="sortNum != null">
+                SORT_NUM = #{sortNum},
+            </if>
+            <if test="pictureType != null">
+                PICTURE_TYPE = #{pictureType},
+            </if>
+            <if test="watermark != null">
+                WATERMARK = #{watermark},
+            </if>
+            <if test="watermarkText != null">
+                WATERMARK_TEXT = #{watermarkText},
+            </if>
+        </trim>
+        where ID=#{id}
+    </update>
+
+</mapper>

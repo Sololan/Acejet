@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wejoy.wejoycms.mapper.ArticleMapper">
+
+    <resultMap id="map" type="com.wejoy.wejoycms.entity.TArticle">
+        <id property="id" column="id"></id>
+    </resultMap>
+    <resultMap id="map2" type="com.wejoy.wejoycms.entity.TArticle">
+        <id property="id" column="id"></id>
+        <collection property="articlePictureList"
+                    select="com.wejoy.wejoycms.mapper.ArticlePictureMapper.getPictureSByArticleId"
+                    column="id"></collection>
+        <collection property="articleFileList"
+                    select="com.wejoy.wejoycms.mapper.ArticleFileMapper.getFileSByArticleId"
+                    column="id"></collection>
+    </resultMap>
+
+    <select id="findPageByCondition" resultType="map" parameterType="Map">
+        select *,(select SUBJECT_NAME from t_subject where t_subject.ID = t_article.SUBJECT_ID) as subjectName
+        from t_article
+        where DELETE_FLAG = 0
+        <if test="articleTitle != null and articleTitle != ''">
+            and ARTICLE_TITLE like "%"#{articleTitle}"%"
+        </if>
+        <if test="articleSubtitle != null and articleSubtitle != ''">
+            and ARTICLE_SUBTITLE like "%"#{articleSubtitle}"%"
+        </if>
+        <if test="subjectId != null and subjectId != ''">
+            and SUBJECT_ID = #{subjectId}
+        </if>
+        <if test="templateId != null and templateId != ''">
+            and TEMPLATE_ID = #{templateId}
+        </if>
+        <if test="articleStatus != null">
+            and STATUS = #{articleStatus}
+        </if>
+        order by
+        <if test="sortNum != 0">
+            SORT_NUM ASC
+        </if>
+        <if test="sortNum == 0">
+            SORT_NUM DESC
+        </if>
+    </select>
+
+    <select id="getArticleSByCode" resultMap="map">
+        select *
+        from t_article
+        where DELETE_FLAG = 0 and STATUS = 1
+        and SUBJECT_ID =
+        (select id from t_subject where SUBJECT_CODE = #{code})
+    </select>
+
+    <select id="getArticleSBySubjectId" resultMap="map2">
+        select *
+        from t_article
+        where DELETE_FLAG = 0 and STATUS = 1
+        and SUBJECT_ID = #{id}
+        order by SORT_NUM
+    </select>
+
+    <select id="getArticleById" resultMap="map2">
+        select *
+        from t_article
+        where DELETE_FLAG = 0 and STATUS = 1
+        and id = #{id}
+    </select>
+
+    <insert id="insertArticle" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into t_article
+        (
+        ARTICLE_TITLE,ARTICLE_BRIEF,SUBJECT_ID,TEMPLATE_ID,STATUS,CREATE_TIME,CREATE_USER_NAME,CREATE_USER,SORT_NUM
+        <if test="articleSubtitle != null">
+            ,ARTICLE_SUBTITLE
+        </if>
+        <if test="picture != null">
+            ,PICTURE
+        </if>
+        <if test="content != null">
+            ,CONTENT
+        </if>
+        ) values
+        (
+        #{articleTitle}, #{articleBrief}, #{subjectId}, #{templateId},#{status}, #{createTime}, #{createUserName},
+        #{createUser}, #{sortNum}
+        <if test="articleSubtitle != null">
+            ,#{articleSubtitle}
+        </if>
+        <if test="picture != null">
+            ,#{picture}
+        </if>
+        <if test="content != null">
+            ,#{content}
+        </if>
+        )
+    </insert>
+
+    <update id="updateArticle">
+        update t_article
+        <trim prefix="set" suffixOverrides=",">
+            <if test="articleTitle != null">
+                ARTICLE_TITLE = #{articleTitle},
+            </if>
+            <if test="articleSubtitle != null">
+                ARTICLE_SUBTITLE = #{articleSubtitle},
+            </if>
+            <if test="articleBrief != null">
+                ARTICLE_BRIEF = #{articleBrief},
+            </if>
+            <if test="subjectId != null">
+                SUBJECT_ID = #{subjectId},
+            </if>
+            <if test="templateId != null">
+                TEMPLATE_ID = #{templateId},
+            </if>
+            <if test="picture != null">
+                PICTURE = #{picture},
+            </if>
+            <if test="status != null">
+                STATUS = #{status},
+            </if>
+            <if test="content != null">
+                CONTENT = #{content},
+            </if>
+            <if test="deleteFlag != null">
+                DELETE_FLAG = #{deleteFlag},
+            </if>
+            <if test="sortNum != null">
+                SORT_NUM = #{sortNum},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <!--    待删除方法-->
+    <update id="setMainArticle">
+        update t_article set PICTURE = #{path}
+        where id = #{id}
+    </update>
+
+    <select id="getAllSelectableArticle" resultMap="map">
+        select ID,ARTICLE_TITLE
+        from t_article
+        where STATUS = 1 and DELETE_FLAG = 0
+        and (SUBJECT_ID = 7 or SUBJECT_ID = 8 or SUBJECT_ID = 9 or SUBJECT_ID = 10
+           or SUBJECT_ID = 11 or SUBJECT_ID = 12 or SUBJECT_ID = 13 or SUBJECT_ID = 14 or SUBJECT_ID = 15)
+    </select>
+
+    <!-- 模糊匹配查询-->
+    <select id="getArtcleSByArtcleTitle" resultMap="map">
+        select *
+        from t_article
+        where ARTICLE_TITLE
+        like concat('%',concat(#{articleTitle},'%'))
+    </select>
+
+    <!--查询所有的栏目-->
+    <select id="getAllSubjectS" resultType="com.wejoy.wejoycms.entity.TSubject">
+        select ID, SUBJECT_NAME
+        from t_subject
+    </select>
+
+    <select id="getArticleForSubject" resultMap="map">
+        select *
+        from t_article
+        where DELETE_FLAG = 0
+        and SUBJECT_ID = #{id}
+        order by SORT_NUM
+        limit #{offset},#{coefficient}
+    </select>
+</mapper>

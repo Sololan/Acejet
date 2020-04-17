@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wejoy.wejoycms.mapper.FriendlyLinkTypeMapper">
+
+    <resultMap id="map" type="com.wejoy.wejoycms.entity.TFirendlyLinkType">
+        <id property="id" column="id"></id>
+    </resultMap>
+
+    <select id="getAllLinkType" resultMap="map">
+        select *
+        from t_friendly_link_type
+    </select>
+
+</mapper>

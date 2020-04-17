@@ -1,0 +1,347 @@
+/* ==================== 登录页 ==================== */
+
+#login-container {
+    position: relative;
+    height: 100%;
+}
+
+#login-container *,
+#login-container *::before,
+#login-container *::after {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+#login-container .content-background {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../img/login_bg.jpg") center no-repeat;
+    background-size: cover;
+}
+
+#login-container .content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    overflow: auto;
+    padding-right: 400px;
+    transition: padding .5s;
+}
+
+#login-container .system-side {
+    text-align: center;
+    height: 100%;
+}
+
+#login-container .system-side::before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 100%;
+}
+
+#login-container .system-side > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#login-container .system-side > img {
+}
+
+#login-container .login-side {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 0;
+    right: 0;
+    width: 400px;
+    min-height: 100%;
+    padding: 10px 50px;
+    transition: width, padding .5s;
+    background-color: rgba(255, 255, 255, .5);
+}
+
+#login-container .login-side-inner {
+    flex: none;
+}
+
+#login-container .logo {
+    width: 94px;
+    height: 94px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: #333333 url("../img/logo.png") center no-repeat;
+}
+
+#login-container .welcome {
+    display: block;
+    margin-top: 55px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#login-container .form-item:first-child {
+    margin-top: 53px;
+}
+
+#login-container .form-item + .form-item {
+    margin-top: 34px;
+}
+
+#login-container .input-group {
+    position: relative;
+    height: 60px;
+    border: 1px solid #000;
+    border-radius: 30px;
+    font-size: 0;
+    padding: 0 30px;
+}
+
+#login-container .input-group::before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 100%;
+}
+
+#login-container .input-group > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#login-container .input-group > label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 100%;
+    text-align: right;
+}
+
+#login-container .input-group > label::before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 100%;
+}
+
+#login-container .input-group > label > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#login-container .input-group > input {
+    width: 100%;
+    height: 40px;
+    color: #000;
+    font-size: 16px;
+    line-height: 40px;
+    padding: 0 10px;
+    border: none;
+    background: none;
+    box-shadow: none;
+}
+
+#login-container .input-group > input::placeholder {
+    color: #666;
+}
+
+#login-container .checkbox-group {
+    display: inline-block;
+    margin-top: 34px;
+    height: 20px;
+    font-size: 0;
+    line-height: 1;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+#login-container .checkbox-group > input[type=checkbox] {
+    position: relative;
+    margin-top: -1px;
+    width: 1px;
+    height: 1px;
+}
+
+#login-container .checkbox-group::before {
+    content: '';
+    width: 0;
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#login-container .checkbox-group > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#login-container .checkbox-group .check-box {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    border: 1px solid #000;
+}
+
+#login-container .checkbox-group > input[type=checkbox]:checked + .check-box {
+    background: #000 url("../img/checkbox_inner.png") center no-repeat;
+}
+
+#login-container .checkbox-group .check-box-label {
+    font-size: 16px;
+    line-height: 16px;
+}
+
+#login-container .error-group {
+    height: 32px;
+    color: #c63030;
+    font-size: 16px;
+    margin-bottom: -32px;
+    text-align: center;
+}
+
+#login-container .error-group::before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 17px;
+    height: 15px;
+    margin-right: 10px;
+    background: url("../img/login_warn.png") center no-repeat;
+}
+
+#login-container .error-group::after {
+    content: '';
+    width: 0;
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#login-container .error-group > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#login-container .btn-login {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 30px;
+    border: none;
+    margin-top: 34px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #000;
+}
+
+#login-container .btn-login:disabled {
+    background-color: #999;
+}
+
+@media (max-width: 1366px) {
+    #login-container .login-side {
+        width: 330px;
+        padding: 10px 40px;
+    }
+
+    #login-container .content {
+        padding-right: 330px;
+    }
+}
+
+@media (max-width: 885px) {
+    #login-container .system-side > img {
+        width: 80%;
+    }
+}
+
+/* ==================== 轮播管理 ==================== */
+
+#banner-container .banner-cards {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px -10px 0;
+    justify-content: center;
+}
+
+#banner-container .banner-card {
+    border-radius: 8px;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, .1);
+    margin: 10px;
+    overflow: hidden;
+}
+
+#banner-container .banner-img {
+    width: 360px;
+    height: 180px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+#banner-container .banner-info {
+    position: relative;
+    padding: 8px 10px;
+}
+
+#banner-container .banner-title,
+#banner-container .banner-direct {
+    display: block;
+    height: 16px;
+    line-height: 18px;
+}
+
+#banner-container .banner-title {
+    font-weight: bold;
+    width: 18rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#banner-container .banner-direct {
+    color: #999;
+}
+
+#banner-container .banner-switch {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+#banner-container .banner-form,
+#article-container .article-form {
+    margin-right: 200px;
+}
+
+#banner-container #uploader {
+    width: 360px;
+    height: 180px;
+    object-fit: cover;
+    cursor: pointer;
+    margin: 0 10px 10px 0;
+}
+
+@media (max-width: 885px) {
+    #banner-container .banner-form,
+    #article-container .article-form {
+        margin-right: 0;
+    }
+}

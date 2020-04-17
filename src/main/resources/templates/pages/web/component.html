@@ -1,0 +1,284 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="header" class="page-header">
+    <div class="member-container">
+        <div class="center-container-wide">
+            <div class="member-content">
+                <span class="tel-label">服务热线</span>
+                <span class="tel">4008088588</span>
+                <span class="corp-mail">企业邮箱</span>
+                <a href="http://mail.acejet.com.cn:8082/owa/auth/logon.aspx?url=http://mail.acejet.com.cn:8082/owa/&reason=0"
+                   class="link">(电信入口)</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-container">
+        <div class="center-container-wide">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="/subject/home">
+                        <img class="logo-image" draggable="false" src="/web/image/acejet/header-logo.png"></a>
+                </div>
+
+                <div class="nav">
+                    <div th:each="info,infoStat : ${parentSubject}"
+                         th:class="${msgAndKid.subjectMsg.subjectName eq info.subjectName}? 'nav-item nav-active' : 'nav-item'">
+                        <a th:href="'/subject/'+@{${info.subjectCode}}"
+                           class="nav-title">
+                            <div class="nav-title-cn" th:text="${info.subjectName}"></div>
+                            <!--                            <div class="nav-title-en" th:text="${info.subjectSubName}"></div>-->
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div th:fragment="articleHeader" class="page-header">
+    <div class="member-container">
+        <div class="center-container-wide">
+            <div class="member-content">
+                <span class="login-text">会员请</span>
+                <a href="javascript:;" class="login-link">登录</a>
+            </div>
+        </div>
+    </div>
+    <div class="header-container">
+        <div class="center-container-wide">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="javascript:;"><img class="logo-image" draggable="false"
+                                                src="/web/image/header-logo.svg"></a>
+                </div>
+                <div class="nav">
+                    <div class="nav-item" th:each="info,infoStat : ${parentSubject}">
+                        <a th:href="@{'/subject/'+${info.subjectCode}}" th:class="nav-title">
+                            <div class="nav-title-cn" th:text="${info.subjectName}"></div>
+                            <div class="nav-title-en" th:text="${info.subjectSubName}"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:fragment="footer" class="page-footer">
+    <div class="footer-container">
+        <div class="center-container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img class="logo-image" draggable="false" src="/web/image/acejet/footer-logo.png" alt="">
+                </div>
+
+                <dl>
+                    <dt>联系电话</dt>
+                    <dd><span class="other-text">025-83246003</span></dd>
+                </dl>
+
+                <dl>
+                    <dt>地址</dt>
+                    <dd><span class="other-text">江苏省南京市广州路188号苏宁环球大厦2006室</span></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="copyright-container">
+        <div class="center-container">
+            <div class="copyright-content">
+                <span class="copyright-text">江苏赛杰科技发展有限公司 版权所有 Copyrighted by ACEJET（Group）Technology Co.,Ltd&emsp;|&emsp;苏ICP备05015763号-1</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:fragment="banner" data-type="component1">
+    <div class="component1-container">
+        <div class="banner-container">
+            <div class="component-content" style="height: 7.1rem">
+                <div class="layui-carousel carousel" id="carousel">
+                    <div carousel-item id="banner-item">
+                        <img src="">
+                    </div>
+                </div>
+                <!--                <div class="carousel-title">-->
+                <!--                    <p class="carousel-text" id="banner-text">-->
+                <!--                        智能教育作为新生事物，将经历萌-->
+                <!--                        芽、成长和成熟等多个阶段。萌芽-->
+                <!--                        阶段，智能教育重点表现在教学环-->
+                <!--                        境构建和设备添置。-->
+                <!--                    </p>-->
+                <!--                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div th:fragment="kid">
+    <!-- Banner图 -->
+    <div class="page-component" data-type="component9">
+        <div class="component9-container">
+            <div class="component-content">
+                <div class="column-banner">
+                    <img class="column-image" draggable="false"
+                         th:each="info,infoStat : ${msgAndKid.subjectMsg.subjectPictureList}"
+                         th:if="${infoStat.index} lt 1" th:src="@{${session.nginxUrl}+${info.picture}}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 豆腐块 -->
+    <div class="page-component" data-type="component10">
+        <div class="component10-container">
+            <div class="center-container">
+                <div class="component-content">
+                    <div class="column-list">
+                        <div th:each="info,infoStat : ${msgAndKid.subjectList}" th:if="${info.showType} eq '10'">
+                            <a class="column-item" th:each="linkInfo,linkInfoStat : ${info.subjectLinkList}"
+                               th:if="${linkInfoStat.index} lt 1" th:href="${linkInfo.linkUrl}">
+                                <img class="column-image" draggable="false"
+                                     th:each="picInfo,picInfoStat : ${info.subjectPictureList}"
+                                     th:if="${picInfoStat.index} lt 1"
+                                     th:src="@{${session.nginxUrl}+${picInfo.picture}}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:each="info,infoStat : ${msgAndKid.subjectList}" class="page-component"
+         th:if="${info.showType eq 8 || info.showType eq 7 || info.showType eq 5 || info.showType eq 11}">
+        <!-- 模板8 -->
+        <div th:if="${info.showType} eq '8'" class="component8-container">
+            <div class="center-container">
+                <div class="component-content">
+                    <div class="column-left">
+                        <img class="column-left-image" draggable="false"
+                             th:each="info,infoStat : ${info.subjectPictureList}" th:if="${infoStat.index} lt 1"
+                             th:src="@{${session.nginxUrl}+${info.picture}}">
+                    </div>
+                    <div class="column-right">
+                        <div class="column-sub-title" th:text="${info.subjectName}"></div>
+                        <div class="column-title" th:text="${info.subjectSubName}"></div>
+                        <div class="column-divider"></div>
+                        <div class="column-describe" th:text="${info.subjectBrief}">
+                        </div>
+                        <a class="column-more1" th:each="info,infoStat : ${info.subjectLinkList}"
+                           th:if="${infoStat.index} lt 1" th:href="@{${info.linkUrl}}">
+                            <span class="column-more-text" th:text="@{${info.linkName}}"></span>
+                            <img class="column-more-icon" draggable="false" src="/web/image/icon-more1.png">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 模板7 -->
+        <div th:if="${info.showType} eq '7'" class="component7-container">
+            <div class="center-container">
+                <div class="component-content">
+                    <div class="column-row">
+                        <div class="column-left">
+                            <div class="column-title" th:text="${info.subjectSubName}"></div>
+                            <div class="column-sub-title" th:text="${info.subjectName}"></div>
+                        </div>
+                        <div class="column-right">
+                            <a class="column-more1" th:each="info,infoStat : ${info.subjectLinkList}"
+                               th:if="${infoStat.index} lt 1" th:href="@{${info.linkUrl}}">
+                                <span class="column-more-text" th:text="@{${info.linkName}}"></span>
+                                <img class="column-more-icon" draggable="false" src="/web/image/icon-more1.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column-describe" th:text="${info.subjectBrief}">
+                    </div>
+                    <img class="column-image" draggable="false" th:each="info,infoStat : ${info.subjectPictureList}"
+                         th:if="${infoStat.index} lt 1" th:src="@{${session.nginxUrl}+${info.picture}}">
+                </div>
+            </div>
+        </div>
+        <!-- 模板6 -->
+        <div th:if="${info.showType} eq '5'" class="component5-container">
+            <div class="center-container">
+                <div class="component-content">
+                    <div class="column-left">
+                        <div class="column-title" th:text="${info.subjectSubName}"></div>
+                        <div class="column-sub-title" th:text="${info.subjectName}"></div>
+                        <img class="column-left-image" draggable="false"
+                             th:each="info,infoStat : ${info.subjectPictureList}" th:if="${infoStat.index} lt 1"
+                             th:src="@{${session.nginxUrl}+${info.picture}}">
+                    </div>
+                    <div class="column-right">
+                        <div class="column-describe" th:text="${info.subjectBrief}">
+                        </div>
+                        <a class="column-more2" th:each="info,infoStat : ${info.subjectLinkList}"
+                           th:if="${infoStat.index} lt 1" th:href="@{${info.linkUrl}}">
+                            <span class="column-more-text" th:text="@{${info.linkName}}"></span>
+                            <img class="column-more-icon" draggable="false" src="/web/image/icon-more2.png">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 模板11 -->
+        <div th:if="${info.showType} eq '11'" class="component11-container">
+            <div class="center-container">
+                <div class="component-content">
+                    <div class="column-left">
+                        <div class="column-sub-title" th:text="${info.subjectName}"></div>
+                        <div class="column-title" th:text="${info.subjectSubName}"></div>
+                        <div class="column-divider"></div>
+                        <div class="column-describe" th:text="${info.subjectBrief}">
+                        </div>
+                        <a class="column-more1" th:each="info,infoStat : ${info.subjectLinkList}"
+                           th:if="${infoStat.index} lt 1" th:href="@{${info.linkUrl}}">
+                            <span class="column-more-text" th:text="@{${info.linkName}}"></span>
+                            <img class="column-more-icon" draggable="false" src="/web/image/icon-more1.png">
+                        </a>
+                    </div>
+                    <div class="column-right">
+                        <img class="column-right-image" draggable="false"
+                             th:each="info,infoStat : ${info.subjectPictureList}" th:if="${infoStat.index} lt 1"
+                             th:src="@{${session.nginxUrl}+${info.picture}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div th:fragment="incubate">
+    <!-- Banner图 -->
+    <div class="page-component" data-type="component9">
+        <div class="component9-container">
+            <div class="component-content">
+                <div class="column-banner">
+                    <img class="column-image" draggable="false"
+                         th:each="info,infoStat : ${msgAndKid.subjectMsg.subjectPictureList}"
+                         th:if="${infoStat.index} lt 1" th:src="@{${session.nginxUrl}+${info.picture}}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 企业孵化-企业列表 -->
+    <div class="page-component" data-type="component17">
+        <div class="component17-container">
+            <div class="center-container">
+                <div class="component-content">
+                    <div class="column-list">
+                        <a th:each="info,infoStat : ${incubate}" href="javascript:;" class="column-item"
+                           th:href="@{${info.linkUrl}}">
+                            <img draggable="false" class="column-image" th:src="@{${session.nginxUrl}+${info.picture}}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
